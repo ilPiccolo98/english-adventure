@@ -238,7 +238,7 @@ export const ParentLandingPage: React.FC = () => {
                 <img
                   src={TINA_CONFIG.realPhotos.welcoming}
                   alt="Teacher Tina in classroom"
-                  className="w-full h-80 sm:h-96 object-cover object-top"
+                  className="w-full h-96 sm:h-[480px] object-cover object-center"
                 />
 
                 {/* Floating Real Proof Card */}
@@ -459,23 +459,25 @@ export const ParentLandingPage: React.FC = () => {
             const currentItem =
               realGallery.find((g) => g.key === activePhotoKey) || realGallery[0];
             return (
-              <div className="bg-gradient-to-r from-purple-50 via-pink-50 to-amber-50 rounded-3xl p-6 sm:p-8 border-4 border-purple-200/60 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                <div className="md:col-span-7 rounded-2xl overflow-hidden shadow-lg border-3 border-white max-h-96 bg-gray-100">
-                  <img
-                    src={currentItem.src}
-                    alt={currentItem.title}
-                    className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-300"
-                  />
+              <div className="bg-gradient-to-r from-purple-50 via-pink-50 to-amber-50 rounded-3xl p-6 sm:p-8 border-4 border-purple-200/60 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div className="md:col-span-5 flex justify-center">
+                  <div className="w-full max-w-sm aspect-[3/4] sm:h-[460px] rounded-2xl overflow-hidden shadow-lg border-3 border-white bg-slate-100 relative group">
+                    <img
+                      src={currentItem.src}
+                      alt={currentItem.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-300"
+                    />
+                  </div>
                 </div>
-                <div className="md:col-span-5 space-y-4 text-center md:text-left">
+                <div className="md:col-span-7 space-y-4 text-center md:text-left">
                   <div className="inline-flex items-center gap-1.5 text-xs font-fredoka font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
                     <Star size={14} className="fill-amber-600" />
                     <span>Real Classroom Snapshot</span>
                   </div>
-                  <h3 className="font-fredoka text-2xl font-black text-[#26324A]">
+                  <h3 className="font-fredoka text-2xl sm:text-3xl font-black text-[#26324A]">
                     {currentItem.title}
                   </h3>
-                  <p className="font-nunito text-sm text-gray-700 font-bold leading-relaxed">
+                  <p className="font-nunito text-base text-gray-700 font-bold leading-relaxed max-w-lg">
                     {currentItem.desc}
                   </p>
                   <div className="pt-2">
@@ -483,9 +485,9 @@ export const ParentLandingPage: React.FC = () => {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-xs sm:text-sm shadow-md"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-sm shadow-md transition-all"
                     >
-                      <MessageCircle size={16} />
+                      <MessageCircle size={18} />
                       <span>Message Teacher Tina</span>
                     </a>
                   </div>
@@ -507,11 +509,11 @@ export const ParentLandingPage: React.FC = () => {
                     : 'border-gray-200 bg-white hover:border-gray-300'
                 }`}
               >
-                <div className="w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gray-100">
+                <div className="w-full aspect-[4/5] rounded-xl overflow-hidden mb-2 bg-gray-100">
                   <img
                     src={photo.src}
                     alt={photo.title}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-center"
                   />
                 </div>
                 <span className="font-fredoka text-xs font-bold text-[#26324A] text-center line-clamp-1">
