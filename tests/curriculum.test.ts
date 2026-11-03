@@ -153,14 +153,14 @@ assert(!unlocked.includes('grammar-hero'), 'Must not unlock Grammar Hero before 
 
 console.log('✅ Badge unlock conditions verified!');
 
-// 5. Tina Teacher Configuration Verification
-console.log('\n5️⃣ Testing Tina Teacher Safety & Configuration...');
-assert(TINA_CONFIG.name === 'Tina Teacher', 'Teacher name must be Tina Teacher');
+// 5. Teacher Tina Configuration Verification
+console.log('\n5️⃣ Testing Teacher Tina Safety & Configuration...');
+assert(TINA_CONFIG.name === 'Teacher Tina', 'Teacher name must be Teacher Tina');
 assert(TINA_CONFIG.lessonFormat.includes('1-on-1'), 'Must explicitly state 1-on-1 individual lessons');
 assert(TINA_CONFIG.contactStatus === 'coming-soon', 'Default contact status must be coming-soon (no fabricated data)');
 assert(TINA_CONFIG.learningJourney.length === 5, 'Must have 5 learning journey skills matching 5 worlds');
 
-console.log('✅ Tina Teacher configuration verified!');
+console.log('✅ Teacher Tina configuration verified!');
 
 console.log('\n🎉 ALL AUTOMATED TESTS PASSED SUCCESSFULLY! 🚀');
 

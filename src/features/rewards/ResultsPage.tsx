@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { getLevelById, getNextLevel } from '../../data/worlds.data';
 import { useGameStore } from '../../store/game.store';
 import { calculateStars, calculateCoinsEarned, formatEncouragement } from '../../services/scoring.service';
 import { fireCelebrationConfetti } from '../../services/confetti.service';
 import { audioService } from '../../services/audio.service';
 import { StarRating } from '../../components/ui/StarRating';
-import { TinaMascot } from '../../components/game/TinaMascot';
+import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
+import { ParentButton } from '../../components/game/ParentButton';
 import { Button } from '../../components/ui/Button';
 import { RotateCcw, ArrowRight, Home, Sparkles } from 'lucide-react';
 import { BADGES } from '../../data/badges.data';
@@ -85,6 +86,11 @@ export const ResultsPage: React.FC = () => {
         ✨
       </div>
 
+      {/* Top Bar with For Parents Button */}
+      <div className="w-full max-w-lg flex items-center justify-end mb-2 z-20">
+        <ParentButton size="sm" />
+      </div>
+
       <div className="w-full max-w-lg bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border-4 border-[#FFB547] shadow-2xl flex flex-col items-center text-center relative z-10">
         {/* Arcade Victory Header */}
         <div className="mb-2">
@@ -99,10 +105,18 @@ export const ResultsPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Mascot & Animated Golden Star Reveal */}
+        {/* Teacher Tina Celebration & Animated Golden Star Reveal */}
         <div className="my-3 flex flex-col items-center">
-          <div className="hover:scale-105 transition-transform">
-            <TinaMascot pose="expressive" size="md" />
+          <div className="hover:scale-105 transition-transform flex flex-col items-center">
+            <TeacherTinaPortrait
+              photo="reading"
+              variant="avatar"
+              size="lg"
+              altText="Teacher Tina celebration"
+            />
+            <span className="font-fredoka text-xs font-black text-[#6C5CE7] bg-purple-100 px-3 py-1 rounded-full mt-2 shadow-2xs">
+              Teacher Tina: "I'm so proud of you!" ⭐
+            </span>
           </div>
           <div className="mt-2 bg-amber-50 px-5 py-2 rounded-2xl border-2 border-amber-200 shadow-sm">
             <StarRating stars={stars} size="lg" animated={true} />
@@ -193,12 +207,10 @@ export const ResultsPage: React.FC = () => {
           )}
         </div>
 
-        {/* For Parents Tina Teacher Footer Link */}
-        <div className="mt-5 pt-4 border-t border-gray-100 w-full flex items-center justify-between text-xs font-bold text-gray-500">
+        {/* For Parents Teacher Tina Footer Card */}
+        <div className="mt-5 pt-4 border-t border-gray-100 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-bold text-gray-500">
           <span>Ready for personalized 1-on-1 lessons?</span>
-          <Link to="/parents" className="text-[#FF7285] hover:underline font-black">
-            Meet Tina Teacher →
-          </Link>
+          <ParentButton size="sm" />
         </div>
       </div>
     </div>

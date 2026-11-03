@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Play, Volume2, VolumeX, Sparkles, Heart } from 'lucide-react';
+import { Play, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { useGameStore } from '../../store/game.store';
-import { TinaMascot } from '../../components/game/TinaMascot';
+import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
+import { ParentButton } from '../../components/game/ParentButton';
 import { Button } from '../../components/ui/Button';
 
 export const WelcomePage: React.FC = () => {
@@ -53,13 +54,7 @@ export const WelcomePage: React.FC = () => {
           <span>{soundEnabled ? 'Sound ON' : 'Sound OFF'}</span>
         </button>
 
-        <Link
-          to="/parents"
-          className="px-4 py-2 bg-white/95 hover:bg-pink-50 text-[#FF7285] font-fredoka font-bold text-sm rounded-2xl border-2 border-pink-200 transition-all shadow-md flex items-center gap-1.5"
-        >
-          <Heart size={16} className="fill-[#FF7285]" />
-          <span>For Parents</span>
-        </Link>
+        <ParentButton size="md" />
       </header>
 
       {/* Main Arcade Hero Section */}
@@ -85,19 +80,27 @@ export const WelcomePage: React.FC = () => {
           </p>
         </div>
 
-        {/* Mascot & Playful Speech Bubble */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-5 my-4 max-w-lg">
-          <div className="relative shrink-0 hover:scale-105 transition-transform">
-            <TinaMascot pose="standing" size="lg" />
-          </div>
+        {/* Teacher Tina Presentation & Playful Speech Bubble */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 my-4 max-w-xl">
+          <TeacherTinaPortrait
+            photo="book"
+            variant="card"
+            size="sm"
+            altText="Teacher Tina holding English book"
+          />
 
           <div className="bg-white/95 p-5 rounded-3xl border-4 border-[#6C5CE7] shadow-2xl text-left relative max-w-xs">
-            <div className="font-fredoka text-[#6C5CE7] text-lg font-black flex items-center gap-1.5">
+            <div className="font-fredoka text-[#6C5CE7] text-xl font-black flex items-center gap-1.5">
               <span>Hi, Explorer!</span> <span>👋</span>
             </div>
-            <p className="font-nunito text-sm text-[#26324A] font-bold mt-1 leading-snug">
-              I am Tina Teacher! Step onto the floating islands, collect golden stars, and speak English with joy!
+            <p className="font-nunito text-sm sm:text-base text-[#26324A] font-bold mt-1 leading-snug">
+              I am Teacher Tina! Step onto the floating islands, collect golden stars, and speak English with joy!
             </p>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-xs font-fredoka font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">
+                👩‍🏫 1-on-1 English Mentor
+              </span>
+            </div>
           </div>
         </div>
 
@@ -128,7 +131,7 @@ export const WelcomePage: React.FC = () => {
       <footer className="w-full max-w-4xl mx-auto px-4 py-4 text-center z-10 flex flex-col sm:flex-row items-center justify-between text-xs text-[#26324A] font-bold gap-2">
         <span>🎮 No Registration • 100% Free • Child-Safe English</span>
         <Link to="/parents" className="text-[#FF7285] hover:underline font-black">
-          Meet Tina Teacher (Individual Lessons) →
+          Meet Teacher Tina (Individual Lessons) →
         </Link>
       </footer>
     </div>

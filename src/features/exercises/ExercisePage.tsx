@@ -8,6 +8,9 @@ import { FeedbackSheet } from './FeedbackSheet';
 import { X, Volume2, VolumeX } from 'lucide-react';
 import { Modal } from '../../components/ui/Modal';
 import { Button } from '../../components/ui/Button';
+import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
+import { ParentButton } from '../../components/game/ParentButton';
+import { ParentQuickModal } from '../../components/game/ParentQuickModal';
 
 export const ExercisePage: React.FC = () => {
   const { levelId } = useParams<{ levelId: string }>();
@@ -23,6 +26,7 @@ export const ExercisePage: React.FC = () => {
   const [feedbackStatus, setFeedbackStatus] = useState<'correct' | 'incorrect' | null>(null);
   const [correctFirstTryCount, setCorrectFirstTryCount] = useState(0);
   const [isExitModalOpen, setIsExitModalOpen] = useState(false);
+  const [isParentModalOpen, setIsParentModalOpen] = useState(false);
 
   if (!levelInfo) {
     return (
@@ -83,26 +87,36 @@ export const ExercisePage: React.FC = () => {
           {/* Progress bar in center */}
           <div className="flex-1 max-w-sm flex flex-col items-center gap-1">
             <div className="flex items-center gap-2 text-[11px] font-black uppercase text-[#6C5CE7] font-fredoka">
-              <span>{world.title}</span>
+              <span className="inline-flex items-center gap-1 text-[#26324A]">
+                <TeacherTinaPortrait photo="lesson" variant="avatar" size="xs" altText="Teacher Tina" />
+                <span className="hidden xs:inline">Teacher Tina</span>
+              </span>
               <span>•</span>
               <span>Stage 0{level.levelNumber}</span>
             </div>
             <ProgressBar current={currentIndex + 1} total={totalExercises} />
           </div>
 
-          {/* Sound toggle */}
-          <button
-            type="button"
-            onClick={toggleSound}
-            aria-label="Toggle sound"
-            className={`p-2.5 rounded-2xl border-2 transition-colors cursor-pointer ${
-              soundEnabled
-                ? 'bg-blue-50 text-[#40BFE8] border-blue-200'
-                : 'bg-gray-100 text-gray-400 border-gray-200'
-            }`}
-          >
-            {soundEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
-          </button>
+          {/* Right actions: Sound & Always-Visible For Parents button */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleSound}
+              aria-label="Toggle sound"
+              className={`p-2 sm:p-2.5 rounded-2xl border-2 transition-colors cursor-pointer ${
+                soundEnabled
+                  ? 'bg-blue-50 text-[#40BFE8] border-blue-200'
+                  : 'bg-gray-100 text-gray-400 border-gray-200'
+              }`}
+            >
+              {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+            </button>
+
+            <ParentButton
+              onClick={() => setIsParentModalOpen(true)}
+              size="sm"
+            />
+          </div>
         </div>
       </header>
 
@@ -155,6 +169,12 @@ export const ExercisePage: React.FC = () => {
           </div>
         </div>
       </Modal>
+
+      {/* For Parents Quick Modal (Never interrupts child stage progress) */}
+      <ParentQuickModal
+        isOpen={isParentModalOpen}
+        onClose={() => setIsParentModalOpen(false)}
+      />
     </div>
   );
 };

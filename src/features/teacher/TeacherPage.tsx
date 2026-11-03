@@ -1,17 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TINA_CONFIG } from '../../data/teacher.config';
-import { TinaMascot } from '../../components/game/TinaMascot';
-import { ArrowLeft, MessageCircle, Mail, CheckCircle2, Star, Sparkles, BookOpen } from 'lucide-react';
+import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
+import {
+  ArrowLeft,
+  MessageCircle,
+  Mail,
+  CheckCircle2,
+  Star,
+  Sparkles,
+  BookOpen,
+  Image as ImageIcon,
+} from 'lucide-react';
 
 export const TeacherPage: React.FC = () => {
-  const isAvailable = TINA_CONFIG.contactStatus === 'available' && (TINA_CONFIG.whatsappNumber || TINA_CONFIG.email);
+  const isAvailable =
+    TINA_CONFIG.contactStatus === 'available' &&
+    (TINA_CONFIG.whatsappNumber || TINA_CONFIG.email);
+
+  const [activePhoto, setActivePhoto] = useState<
+    'book' | 'welcome' | 'lesson' | 'reading' | 'thumbsUp'
+  >('book');
 
   const getWhatsAppLink = () => {
     if (!TINA_CONFIG.whatsappNumber) return '#';
-    const text = encodeURIComponent(TINA_CONFIG.whatsappMessage || 'Hello Tina! I would like to ask about individual English lessons.');
+    const text = encodeURIComponent(
+      TINA_CONFIG.whatsappMessage ||
+        'Hello Teacher Tina! I would like to ask about individual English lessons.'
+    );
     return `https://wa.me/${TINA_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${text}`;
   };
+
+  const galleryItems = [
+    {
+      id: 'book' as const,
+      title: 'English Adventure Course',
+      subtitle: 'Structured, child-friendly curriculum',
+      src: TINA_CONFIG.photos.book,
+    },
+    {
+      id: 'thumbsUp' as const,
+      title: 'Positive Encouragement',
+      subtitle: 'Celebrating every correct answer with a smile',
+      src: TINA_CONFIG.photos.thumbsUp,
+    },
+    {
+      id: 'welcome' as const,
+      title: 'Warm Classroom Welcome',
+      subtitle: 'Safe, encouraging learning space',
+      src: TINA_CONFIG.photos.welcome,
+    },
+    {
+      id: 'lesson' as const,
+      title: 'Interactive Board Lessons',
+      subtitle: 'Visual phonics, animals & vocabulary',
+      src: TINA_CONFIG.photos.lesson,
+    },
+    {
+      id: 'reading' as const,
+      title: 'Proven Milestone Success',
+      subtitle: 'Celebrating 3+ years of happy young learners',
+      src: TINA_CONFIG.photos.reading,
+    },
+  ];
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#FFF9F0] via-white to-[#FDF4F5] py-8 px-4 flex flex-col items-center">
@@ -32,11 +83,15 @@ export const TeacherPage: React.FC = () => {
 
         {/* Main Card */}
         <div className="bg-white rounded-3xl p-6 sm:p-10 border-4 border-pink-200 shadow-xl space-y-8">
-          {/* Header Profile */}
+          {/* Header Profile with Teacher Tina Photo */}
           <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left pb-6 border-b border-gray-100">
-            <div className="relative shrink-0">
-              <TinaMascot pose="standing" size="lg" />
-            </div>
+            <TeacherTinaPortrait
+              photo={activePhoto}
+              variant="card"
+              size="sm"
+              altText="Teacher Tina"
+              className="shrink-0"
+            />
 
             <div className="space-y-2">
               <div className="inline-flex items-center gap-1.5 bg-purple-50 text-[#6C5CE7] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
@@ -54,6 +109,39 @@ export const TeacherPage: React.FC = () => {
             </div>
           </div>
 
+          {/* Classroom Photo Gallery Showcase */}
+          <div>
+            <h3 className="font-fredoka text-xl font-bold text-[#26324A] mb-3 flex items-center gap-2">
+              <ImageIcon size={20} className="text-[#6C5CE7]" />
+              <span>Inside Teacher Tina's Learning Environment</span>
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+              {galleryItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActivePhoto(item.id)}
+                  className={`p-2 rounded-2xl border-3 transition-all cursor-pointer text-left flex flex-col items-center ${
+                    activePhoto === item.id
+                      ? 'border-[#6C5CE7] bg-purple-50 ring-2 ring-purple-200 shadow-md scale-102'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                  }`}
+                >
+                  <div className="w-full aspect-square rounded-xl overflow-hidden mb-1.5 bg-gray-100">
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <span className="font-fredoka text-xs font-bold text-[#26324A] text-center line-clamp-1">
+                    {item.title}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Individual Lessons Only Notice */}
           <div className="bg-gradient-to-r from-purple-50 via-pink-50 to-amber-50 p-5 rounded-2xl border-2 border-purple-200 flex flex-col sm:flex-row items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-white shadow-xs flex items-center justify-center text-2xl shrink-0">
@@ -64,7 +152,7 @@ export const TeacherPage: React.FC = () => {
                 {TINA_CONFIG.lessonFormat}
               </h3>
               <p className="font-nunito text-xs sm:text-sm text-gray-700 font-semibold mt-0.5">
-                Tina focuses exclusively on individual 1-on-1 tutoring. No crowded groups or rushed schedules. Your child receives 100% personalized attention at their own comfortable learning pace.
+                Teacher Tina focuses exclusively on individual 1-on-1 tutoring. No crowded groups or rushed schedules. Your child receives 100% personalized attention at their own comfortable learning pace.
               </p>
             </div>
           </div>
@@ -73,7 +161,7 @@ export const TeacherPage: React.FC = () => {
           <div>
             <h3 className="font-fredoka text-xl font-bold text-[#26324A] mb-3 flex items-center gap-2">
               <Star size={20} className="fill-[#FFB547] stroke-[#FFB547]" />
-              <span>Why Learn with Tina?</span>
+              <span>Why Learn with Teacher Tina?</span>
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {TINA_CONFIG.benefits.map((benefit, idx) => (
@@ -141,7 +229,7 @@ export const TeacherPage: React.FC = () => {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-2xl shadow-lg border-b-4 border-[#5644D4] transition-all"
                   >
                     <Mail size={22} />
-                    <span>Email Tina</span>
+                    <span>Email Teacher Tina</span>
                   </a>
                 )}
               </div>
@@ -152,7 +240,7 @@ export const TeacherPage: React.FC = () => {
                   Contact Details Coming Soon
                 </h4>
                 <p className="text-xs sm:text-sm font-nunito font-semibold text-gray-600 mt-1">
-                  Tina Teacher's direct WhatsApp number and lesson booking schedule will be listed here.
+                  Teacher Tina's direct WhatsApp number and lesson booking schedule will be listed here.
                 </p>
                 <div className="mt-3 text-[11px] text-gray-400 bg-white p-2 rounded-xl border border-gray-200 font-mono">
                   Site owner: configure in <code>src/data/teacher.config.ts</code>

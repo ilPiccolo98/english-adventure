@@ -6,6 +6,7 @@ import { AvatarDisplay } from '../icons/GameIcons';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { audioService } from '../../services/audio.service';
+import { ParentButton } from './ParentButton';
 
 interface TopHUDProps {
   showBackHome?: boolean;
@@ -59,7 +60,7 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
   };
 
   const handleTestVoice = () => {
-    audioService.speak("Hello! I am Tina Teacher! Let's learn English together!");
+    audioService.speak("Hello! I am Teacher Tina! Let's learn English together!");
   };
 
   return (
@@ -109,24 +110,17 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <button
               onClick={toggleSound}
-              className={`p-2 rounded-2xl border-2 transition-all cursor-pointer ${
-                soundEnabled
+              className={`p-2 rounded-2xl border-2 transition-all cursor-pointer ${soundEnabled
                   ? 'bg-blue-50 text-[#40BFE8] border-blue-200 hover:bg-blue-100'
                   : 'bg-gray-100 text-gray-400 border-gray-200 hover:bg-gray-200'
-              }`}
+                }`}
               title={soundEnabled ? 'Mute Sound' : 'Enable Sound'}
               aria-label={soundEnabled ? 'Mute Sound' : 'Enable Sound'}
             >
               {soundEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
             </button>
 
-            <Link
-              to="/parents"
-              className="px-2.5 py-1.5 bg-pink-50 text-[#FF7285] hover:bg-pink-100 font-fredoka text-xs sm:text-sm font-bold rounded-2xl border-2 border-pink-200 transition-colors"
-              title="Information for Parents"
-            >
-              Parents
-            </Link>
+            <ParentButton size="sm" />
 
             <button
               onClick={() => setIsSettingsOpen(true)}
@@ -152,11 +146,10 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
               <button
                 type="button"
                 onClick={() => setDifficulty('little')}
-                className={`p-3 rounded-2xl font-fredoka font-bold text-sm text-center border-3 transition-all cursor-pointer ${
-                  player.difficulty === 'little'
+                className={`p-3 rounded-2xl font-fredoka font-bold text-sm text-center border-3 transition-all cursor-pointer ${player.difficulty === 'little'
                     ? 'bg-[#6C5CE7] text-white border-[#5644D4] shadow-md'
                     : 'bg-gray-50 text-[#26324A] border-gray-200 hover:bg-purple-50'
-                }`}
+                  }`}
               >
                 🐣 Little Explorer
                 <span className="block text-[11px] font-normal opacity-90">Ages 5–7</span>
@@ -164,11 +157,10 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
               <button
                 type="button"
                 onClick={() => setDifficulty('super')}
-                className={`p-3 rounded-2xl font-fredoka font-bold text-sm text-center border-3 transition-all cursor-pointer ${
-                  player.difficulty === 'super'
+                className={`p-3 rounded-2xl font-fredoka font-bold text-sm text-center border-3 transition-all cursor-pointer ${player.difficulty === 'super'
                     ? 'bg-[#6C5CE7] text-white border-[#5644D4] shadow-md'
                     : 'bg-gray-50 text-[#26324A] border-gray-200 hover:bg-purple-50'
-                }`}
+                  }`}
               >
                 🚀 Super Explorer
                 <span className="block text-[11px] font-normal opacity-90">Ages 8–10</span>
@@ -176,12 +168,12 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
             </div>
           </div>
 
-          {/* Tina Teacher Female Voice Selector & Native English Audio */}
+          {/* Teacher Tina Voice Selector & Native English Audio */}
           <div className="bg-white p-4 rounded-2xl border-2 border-purple-100 space-y-3">
             <div className="flex items-center justify-between">
               <div>
                 <span className="font-fredoka font-bold text-sm text-[#26324A] block">
-                  Tina Teacher Voice (Native English 👩‍🏫)
+                  Teacher Tina Voice (Native English 👩‍🏫)
                 </span>
                 <span className="text-xs text-emerald-600 font-bold font-nunito flex items-center gap-1">
                   ✓ Studio native English audio active
@@ -228,11 +220,10 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
               <button
                 type="button"
                 onClick={toggleSound}
-                className={`px-4 py-1.5 rounded-xl font-fredoka font-bold text-sm border-2 cursor-pointer ${
-                  soundEnabled
+                className={`px-4 py-1.5 rounded-xl font-fredoka font-bold text-sm border-2 cursor-pointer ${soundEnabled
                     ? 'bg-[#35C98A] text-white border-[#27AD72]'
                     : 'bg-gray-200 text-gray-600 border-gray-300'
-                }`}
+                  }`}
               >
                 {soundEnabled ? 'ON' : 'OFF'}
               </button>
@@ -243,11 +234,10 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
               <button
                 type="button"
                 onClick={toggleReducedMotion}
-                className={`px-4 py-1.5 rounded-xl font-fredoka font-bold text-sm border-2 cursor-pointer ${
-                  reducedMotion
+                className={`px-4 py-1.5 rounded-xl font-fredoka font-bold text-sm border-2 cursor-pointer ${reducedMotion
                     ? 'bg-[#35C98A] text-white border-[#27AD72]'
                     : 'bg-gray-200 text-gray-600 border-gray-300'
-                }`}
+                  }`}
               >
                 {reducedMotion ? 'ON' : 'OFF'}
               </button>

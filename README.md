@@ -1,6 +1,6 @@
 # 🌟 English Adventure — 2D Arcade English Game for Kids
 
-> **A cheerful, accessible, static browser-based English-learning game designed for children aged 5–10 whose first language is Arabic, introducing parents to Tina Teacher's individual 1-on-1 English lessons.**
+> **A cheerful, accessible, static browser-based English-learning game designed for children aged 5–10 whose first language is Arabic, introducing parents to Teacher Tina's individual 1-on-1 English lessons.**
 
 ---
 
@@ -20,8 +20,8 @@
   - ⭐ **1–3 Stars**: Mistakes can be retried without losing previously earned stars. A completed level always receives at least 1 star!
   - 🪙 **Coins**: Rewarded upon level completion.
   - 🏆 **Badges**: Milestone rewards (*"First Steps"*, *"Word Explorer"*, *"Grammar Hero"*, *"Sound Detective"*, *"Reading Star"*, *"Super Listener"*, *"English Champion"*).
-- **Meet Tina Teacher (Screen G / For Parents)**:
-  - Trustworthy section explaining Tina's **individual 1-on-1 lessons** only.
+- **Meet Teacher Tina (Screen G / For Parents)**:
+  - Trustworthy section explaining Teacher Tina's **individual 1-on-1 lessons** only.
   - *"Your Learning Journey"* overview of the 5 skills.
   - Safe, configurable contact setup with zero fabricated details.
 - **€0 Budget Target**:
@@ -78,18 +78,21 @@ english-adventure/
 │   ├── app/
 │   ├── components/
 │   │   ├── game/
+│   │   │   ├── TeacherTinaPortrait.tsx # Photo portrait & avatar component
 │   │   │   ├── TinaMascot.tsx      # SVG mascot (Avatar, Standing, Expressive poses)
-│   │   │   └── TopHUD.tsx          # Star & coin HUD, avatar, path badge & settings
+│   │   │   ├── TopHUD.tsx          # Star & coin HUD, avatar, path badge & settings
+│   │   │   └── WorldIslandIllustration.tsx # 5 Floating island arcade dioramas
 │   │   ├── icons/
 │   │   │   └── GameIcons.tsx       # Avatar circular frame display
 │   │   └── ui/
 │   │       ├── Button.tsx          # 3D tactile arcade buttons
-│   │       ├── AudioButton.tsx     # Web Speech synthesis speaker button
+│   │       ├── AudioButton.tsx     # Native English audio speaker button
 │   │       ├── ProgressBar.tsx     # Animated progress bar
 │   │       ├── StarRating.tsx      # Golden stars with animations
 │   │       └── Modal.tsx           # Accessible modal popup
 │   ├── data/
-│   │   ├── teacher.config.ts       # ⚙️ Editable Tina Teacher contact configuration
+│   │   ├── teacher.config.ts       # ⚙️ Editable Teacher Tina contact configuration
+│   │   ├── audio-manifest.json     # 110 Studio-recorded English voice clips
 │   │   ├── badges.data.ts          # Achievement badge definitions
 │   │   ├── avatars.data.ts         # Cartoon explorer avatar profiles
 │   │   ├── worlds.data.ts          # 5 Worlds metadata & navigation helpers
@@ -106,9 +109,9 @@ english-adventure/
 │   │   ├── worlds/                 # Screen 4: World level selection
 │   │   ├── exercises/              # Screen 5: Exercise session engine & renderers
 │   │   ├── rewards/                # Screen 6: Results & badges modal
-│   │   └── teacher/                # Screen 7: For Parents / Meet Tina Teacher
+│   │   └── teacher/                # Screen 7: For Parents / Meet Teacher Tina
 │   ├── services/
-│   │   ├── audio.service.ts        # window.speechSynthesis & Web Audio UI chimes
+│   │   ├── audio.service.ts        # Native English audio playback & procedural UI chimes
 │   │   ├── scoring.service.ts      # Non-punitive star & coin calculator
 │   │   └── confetti.service.ts     # Celebration confetti (respects reducedMotion)
 │   ├── store/
@@ -129,22 +132,22 @@ english-adventure/
 
 ---
 
-## ⚙️ How to Configure Tina Teacher's Contact Details
+## ⚙️ How to Configure Teacher Tina's Contact Details
 
 Open [`src/data/teacher.config.ts`](file:///c:/Users/Utente/Desktop/projects/english-videogame/src/data/teacher.config.ts) in your editor:
 
 ```typescript
 export const TINA_CONFIG: TeacherConfig = {
-  name: 'Tina Teacher',
-  title: 'Meet Tina Teacher',
+  name: 'Teacher Tina',
+  title: 'Meet Teacher Tina',
   tagline: 'Fun, personalized individual English lessons for young explorers!',
   lessonFormat: 'Individual Lessons (1-on-1 Only)',
   
-  // Set to 'available' when you have Tina's contact info ready!
+  // Set to 'available' when you have Teacher Tina's contact info ready!
   contactStatus: 'available', 
   whatsappNumber: '+391234567890', // Enter WhatsApp phone number with country code
-  whatsappMessage: 'Hello Tina! I would like to ask about individual lessons for my child.',
-  email: 'tina.teacher@example.com',
+  whatsappMessage: 'Hello Teacher Tina! I would like to ask about individual lessons for my child.',
+  email: 'teacher.tina@example.com',
   bookingUrl: 'https://calendly.com/...',
   ...
 };

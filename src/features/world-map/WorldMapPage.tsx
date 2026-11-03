@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { TopHUD } from '../../components/game/TopHUD';
 import { WORLDS_DATA } from '../../data/worlds.data';
 import { useGameStore } from '../../store/game.store';
-import { TinaMascot } from '../../components/game/TinaMascot';
+import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
 import { WorldIslandIllustration } from '../../components/game/WorldIslandIllustration';
 import { BadgesModal } from '../rewards/BadgesModal';
-import { Award, ArrowRight, Star, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Award, ArrowRight, Star, Sparkles, CheckCircle2, Volume2 } from 'lucide-react';
+import { audioService } from '../../services/audio.service';
 
 export const WorldMapPage: React.FC = () => {
   const completedLevelIds = useGameStore((state) => state.completedLevelIds);
@@ -36,7 +37,7 @@ export const WorldMapPage: React.FC = () => {
         {/* Arcade Overworld Banner */}
         <div className="w-full bg-white/95 backdrop-blur-md rounded-3xl p-5 border-4 border-[#6C5CE7] shadow-xl flex items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-3 sm:gap-4">
-            <TinaMascot pose="avatar" size="sm" />
+            <TeacherTinaPortrait photo="welcome" variant="avatar" size="sm" altText="Teacher Tina" />
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-fredoka text-xs font-black uppercase text-[#6C5CE7] bg-purple-100 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
@@ -160,25 +161,47 @@ export const WorldMapPage: React.FC = () => {
           })}
         </div>
 
-        {/* Bottom Bar: For Parents / Tina Teacher */}
-        <div className="w-full max-w-xl bg-gradient-to-r from-pink-50 via-purple-50 to-amber-50 p-5 rounded-3xl border-4 border-pink-200 shadow-xl flex items-center justify-between gap-4 mt-2">
-          <div className="flex items-center gap-3">
-            <span className="text-3xl">👩‍🏫</span>
-            <div>
-              <span className="font-fredoka text-base font-black text-[#26324A] block">
-                Meet Tina Teacher
-              </span>
-              <span className="text-xs font-bold text-gray-600 font-nunito">
-                Friendly individual 1-on-1 English lessons for your child!
-              </span>
+        {/* Bottom Bar: Teacher Tina's Clubhouse & Parent Portal */}
+        <div className="w-full max-w-2xl bg-gradient-to-r from-pink-50 via-purple-50 to-amber-50 p-4 sm:p-5 rounded-3xl border-4 border-pink-300 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
+          <div className="flex items-center gap-3.5 sm:gap-4 w-full sm:w-auto flex-1 min-w-0">
+            <TeacherTinaPortrait
+              photo="book"
+              variant="avatar"
+              size="md"
+              altText="Teacher Tina"
+            />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-fredoka text-base sm:text-lg font-black text-[#26324A] block leading-tight">
+                  Meet Teacher Tina
+                </span>
+                <span className="text-xs bg-purple-100 text-[#6C5CE7] font-fredoka font-bold px-2 py-0.5 rounded-full shrink-0">
+                  1-on-1
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm font-bold text-gray-600 font-nunito mt-0.5 leading-snug">
+                Personalized individual lessons tailored for young explorers!
+              </p>
             </div>
           </div>
-          <Link
-            to="/parents"
-            className="px-4 py-2.5 bg-gradient-to-r from-[#FF7285] to-[#E65A6E] text-white hover:brightness-105 font-fredoka font-black text-xs sm:text-sm rounded-2xl shadow-md border-b-3 border-[#C9384E] shrink-0 transition-all active:translate-y-0.5 active:border-b-1"
-          >
-            For Parents
-          </Link>
+
+          <div className="flex items-center gap-2 sm:gap-2.5 w-full sm:w-auto justify-end shrink-0">
+            <button
+              type="button"
+              onClick={() => audioService.speak("Hello! I am Teacher Tina! Let's learn English together!")}
+              className="px-3 py-2.5 sm:px-3.5 bg-white text-[#6C5CE7] hover:bg-purple-100 font-fredoka font-bold text-xs rounded-2xl border-2 border-purple-200 shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap transition-transform active:scale-95"
+              title="Hear Teacher Tina say hello"
+            >
+              <Volume2 size={16} className="shrink-0" />
+              <span>Say Hello!</span>
+            </button>
+            <Link
+              to="/parents"
+              className="px-3.5 py-2.5 sm:px-4 bg-gradient-to-r from-[#FF7285] to-[#E65A6E] text-white hover:brightness-105 font-fredoka font-black text-xs sm:text-sm rounded-2xl shadow-md border-b-3 border-[#C9384E] shrink-0 whitespace-nowrap transition-all active:translate-y-0.5 active:border-b-1"
+            >
+              For Parents →
+            </Link>
+          </div>
         </div>
       </main>
 

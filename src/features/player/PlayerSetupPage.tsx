@@ -6,6 +6,8 @@ import { AvatarDisplay } from '../../components/icons/GameIcons';
 import { AVATAR_LIST } from '../../data/avatars.data';
 import { Button } from '../../components/ui/Button';
 import { Compass, Sparkles, Check } from 'lucide-react';
+import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
+import { ParentButton } from '../../components/game/ParentButton';
 
 export const PlayerSetupPage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,6 +30,18 @@ export const PlayerSetupPage: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#B4E4FF] via-[#F0EDFF] to-[#FFF9F0] py-8 px-4 flex flex-col items-center select-none">
+      {/* Top Bar with For Parents Button */}
+      <div className="w-full max-w-xl flex items-center justify-between mb-3 z-10">
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          className="text-xs font-fredoka font-bold text-[#6C5CE7] bg-white px-3.5 py-1.5 rounded-2xl border-2 border-purple-100 shadow-xs hover:bg-purple-50 cursor-pointer"
+        >
+          ← Home
+        </button>
+        <ParentButton size="sm" />
+      </div>
+
       <div className="w-full max-w-xl bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border-4 border-[#6C5CE7] shadow-2xl">
         {/* Header Badge */}
         <div className="text-center mb-6">
@@ -40,6 +54,24 @@ export const PlayerSetupPage: React.FC = () => {
           <p className="text-sm font-bold text-gray-500 font-nunito mt-1">
             Choose your learning path and pick your arcade hero!
           </p>
+        </div>
+
+        {/* Teacher Tina Welcome Banner */}
+        <div className="mb-6 bg-gradient-to-r from-purple-50 via-pink-50 to-amber-50 p-4 rounded-3xl border-3 border-purple-200 flex items-center gap-4 shadow-sm">
+          <TeacherTinaPortrait
+            photo="welcome"
+            variant="avatar"
+            size="md"
+            altText="Teacher Tina welcoming explorer"
+          />
+          <div>
+            <span className="font-fredoka text-sm font-black text-[#6C5CE7] flex items-center gap-1">
+              Teacher Tina says: <Sparkles size={14} className="text-[#FFB547] fill-[#FFB547]" />
+            </span>
+            <p className="font-nunito text-xs sm:text-sm font-bold text-[#26324A] leading-snug mt-0.5">
+              "Welcome to English class, Explorer! Pick your hero and let's get ready for adventure!"
+            </p>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
