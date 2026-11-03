@@ -174,5 +174,16 @@ const isComplete = completedMockState.completedLevelIds.length >= 15;
 assert(isComplete, 'Grand Certificate must unlock when 15 stages are complete');
 console.log('✅ Grand Certificate 15-stage requirement verified!');
 
+// 7. Parent Funnel Landing Configuration & Real Photos Verification
+console.log('\n7️⃣ Testing Parent Funnel Configuration & Real Photos...');
+assert(Boolean(TINA_CONFIG.realPhotos.welcoming), 'Must have welcoming real photo configured');
+assert(Boolean(TINA_CONFIG.realPhotos.standing), 'Must have standing real photo configured');
+assert(Boolean(TINA_CONFIG.realPhotos.blackboard), 'Must have blackboard real photo configured');
+assert(Boolean(TINA_CONFIG.realPhotos.guidance), 'Must have guidance real photo configured');
+assert(Boolean(TINA_CONFIG.realPhotos.portrait), 'Must have portrait real photo configured');
+assert(TINA_CONFIG.courses.length >= 3, 'Must have at least 3 course tracks configured');
+assert(TINA_CONFIG.faqs.length >= 4, 'Must have at least 4 parent FAQs configured');
+console.log('✅ Parent Funnel Configuration & Real Photos verified!');
+
 console.log('\n🎉 ALL AUTOMATED TESTS PASSED SUCCESSFULLY! 🚀');
 

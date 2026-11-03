@@ -1,12 +1,12 @@
 import React from 'react';
 import { createHashRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { ParentLandingPage } from './features/landing/ParentLandingPage';
 import { WelcomePage } from './features/welcome/WelcomePage';
 import { PlayerSetupPage } from './features/player/PlayerSetupPage';
 import { WorldMapPage } from './features/world-map/WorldMapPage';
 import { WorldDetailPage } from './features/worlds/WorldDetailPage';
 import { ExercisePage } from './features/exercises/ExercisePage';
 import { ResultsPage } from './features/rewards/ResultsPage';
-import { TeacherPage } from './features/teacher/TeacherPage';
 import { CertificatePage } from './features/certificate/CertificatePage';
 
 // We use createHashRouter for 100% reliable static hosting on GitHub Pages / Cloudflare Pages
@@ -14,6 +14,10 @@ import { CertificatePage } from './features/certificate/CertificatePage';
 const router = createHashRouter([
   {
     path: '/',
+    element: <ParentLandingPage />,
+  },
+  {
+    path: '/play',
     element: <WelcomePage />,
   },
   {
@@ -38,7 +42,7 @@ const router = createHashRouter([
   },
   {
     path: '/parents',
-    element: <TeacherPage />,
+    element: <ParentLandingPage />,
   },
   {
     path: '/certificate',

@@ -40,21 +40,31 @@ export const WelcomePage: React.FC = () => {
       </div>
 
       {/* Top Header Bar */}
-      <header className="w-full max-w-5xl mx-auto px-4 py-4 flex items-center justify-between z-10">
-        <button
-          onClick={toggleSound}
-          className={`px-3.5 py-2 rounded-2xl border-2 font-fredoka font-bold text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md ${
-            soundEnabled
-              ? 'bg-white text-[#40BFE8] border-blue-200 hover:bg-blue-50'
-              : 'bg-gray-100 text-gray-400 border-gray-300'
-          }`}
-          title={soundEnabled ? 'Mute sound' : 'Enable sound'}
-        >
-          {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
-          <span>{soundEnabled ? 'Sound ON' : 'Sound OFF'}</span>
-        </button>
+      <header className="w-full max-w-5xl mx-auto px-4 py-4 flex items-center justify-between z-10 gap-2">
+        <div className="flex items-center gap-2">
+          <Link
+            to="/"
+            className="px-3 py-2 rounded-2xl border-2 border-purple-200 font-fredoka font-bold text-xs bg-white text-[#6C5CE7] hover:bg-purple-50 flex items-center gap-1 shadow-xs"
+            title="Home"
+          >
+            <span>← Home</span>
+          </Link>
 
-        <ParentButton size="md" />
+          <button
+            onClick={toggleSound}
+            className={`px-3.5 py-2 rounded-2xl border-2 font-fredoka font-bold text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md ${
+              soundEnabled
+                ? 'bg-white text-[#40BFE8] border-blue-200 hover:bg-blue-50'
+                : 'bg-gray-100 text-gray-400 border-gray-300'
+            }`}
+            title={soundEnabled ? 'Mute sound' : 'Enable sound'}
+          >
+            {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+            <span className="hidden sm:inline">{soundEnabled ? 'Sound ON' : 'Sound OFF'}</span>
+          </button>
+        </div>
+
+        <ParentButton size="md" to="/" />
       </header>
 
       {/* Main Arcade Hero Section */}
