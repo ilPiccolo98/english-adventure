@@ -8,34 +8,31 @@ import {
   Sparkles,
   ChevronDown,
   Gamepad2,
-  ArrowRight,
   ShieldCheck,
   Star,
   Heart,
 } from 'lucide-react';
 import { TINA_CONFIG } from '../../data/teacher.config';
 import { KidsArcadePlaque } from '../../components/landing/KidsArcadePlaque';
+import { TeacherContactModal } from '../../components/landing/TeacherContactModal';
 
 export const ParentLandingPage: React.FC = () => {
   const [activePhotoKey, setActivePhotoKey] = useState<
     'welcoming' | 'standing' | 'blackboard' | 'guidance' | 'portrait'
   >('welcoming');
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [contactInitialMessage, setContactInitialMessage] = useState<string>('');
 
   const navigate = useNavigate();
 
-  const getWhatsAppLink = (customText?: string) => {
-    if (!TINA_CONFIG.whatsappNumber) return '#';
-    const baseText =
-      customText ||
-      'Hello Teacher Tina! I saw your English courses page and would like to ask about 1-on-1 private lessons for my child.';
-    const text = encodeURIComponent(baseText);
-    return `https://wa.me/${TINA_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${text}`;
+  const handleOpenContact = (customMessage?: string) => {
+    setContactInitialMessage(
+      customMessage ||
+        'Hello Teacher Tina! I saw your English courses page and would like to ask about 1-on-1 private lessons for my child.'
+    );
+    setIsContactModalOpen(true);
   };
-
-  const isAvailable =
-    TINA_CONFIG.contactStatus === 'available' &&
-    (TINA_CONFIG.whatsappNumber || TINA_CONFIG.email);
 
   const realGallery = [
     {
@@ -125,17 +122,14 @@ export const ParentLandingPage: React.FC = () => {
               <span>Kids Play Zone</span>
             </a>
 
-            {isAvailable && (
-              <a
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs shadow-xs transition-all"
-              >
-                <MessageCircle size={16} />
-                <span>WhatsApp</span>
-              </a>
-            )}
+            <button
+              type="button"
+              onClick={() => handleOpenContact()}
+              className="hidden sm:inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs shadow-xs transition-all cursor-pointer"
+            >
+              <MessageCircle size={16} />
+              <span>Contact Teacher Tina</span>
+            </button>
           </div>
         </div>
       </header>
@@ -198,29 +192,19 @@ export const ParentLandingPage: React.FC = () => {
 
             {/* Hero CTAs */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              {isAvailable ? (
-                <a
-                  href={getWhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-lg rounded-2xl shadow-xl border-b-4 border-[#1AA851] transform hover:scale-102 transition-all cursor-pointer"
-                >
-                  <MessageCircle size={24} />
-                  <span>Chat with Teacher Tina on WhatsApp</span>
-                </a>
-              ) : (
-                <a
-                  href="#courses"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-base rounded-2xl shadow-lg border-b-4 border-[#4A3EB5] transition-all"
-                >
-                  <span>Explore Courses & Details</span>
-                  <ArrowRight size={18} />
-                </a>
-              )}
+              <button
+                type="button"
+                onClick={() => handleOpenContact()}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-lg rounded-2xl shadow-xl border-b-4 border-[#1AA851] transform hover:scale-102 transition-all cursor-pointer"
+              >
+                <MessageCircle size={24} />
+                <span>Chat with Teacher Tina on WhatsApp</span>
+              </button>
 
               <button
+                type="button"
                 onClick={() => navigate('/play')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-50 text-[#6C5CE7] border-2 border-purple-200 font-fredoka font-bold text-base rounded-2xl shadow-xs transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-50 text-[#6C5CE7] border-2 border-purple-200 font-fredoka font-bold text-base rounded-2xl shadow-xs transition-all cursor-pointer"
               >
                 <Gamepad2 size={20} />
                 <span>Let Your Child Play First</span>
@@ -251,9 +235,13 @@ export const ParentLandingPage: React.FC = () => {
                       Certified English Teacher for Children
                     </span>
                   </div>
-                  <span className="text-xs font-fredoka font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+                  <button
+                    type="button"
+                    onClick={() => handleOpenContact()}
+                    className="text-xs font-fredoka font-bold text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-3 py-1 rounded-full border border-emerald-200 cursor-pointer transition-colors"
+                  >
                     1-on-1 Lessons Ready
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -309,8 +297,9 @@ export const ParentLandingPage: React.FC = () => {
 
               <div className="mt-6 pt-4 border-t border-amber-200/60">
                 <button
+                  type="button"
                   onClick={() => navigate('/play')}
-                  className="font-fredoka font-bold text-xs text-amber-900 bg-amber-200/80 hover:bg-amber-300 px-4 py-2 rounded-xl transition-all flex items-center gap-1.5"
+                  className="font-fredoka font-bold text-xs text-amber-900 bg-amber-200/80 hover:bg-amber-300 px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <Gamepad2 size={16} />
                   <span>Launch Game Now →</span>
@@ -347,15 +336,18 @@ export const ParentLandingPage: React.FC = () => {
               </div>
 
               <div className="mt-6 pt-4 border-t border-purple-200/60">
-                <a
-                  href={getWhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-fredoka font-bold text-xs text-purple-900 bg-purple-200/80 hover:bg-purple-300 px-4 py-2 rounded-xl transition-all inline-flex items-center gap-1.5"
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleOpenContact(
+                      'Hello Teacher Tina! I would like to inquire about your 1-on-1 private lessons for my child.'
+                    )
+                  }
+                  className="font-fredoka font-bold text-xs text-purple-900 bg-purple-200/80 hover:bg-purple-300 px-4 py-2 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer"
                 >
                   <MessageCircle size={16} />
-                  <span>Inquire on WhatsApp →</span>
-                </a>
+                  <span>Contact for 1-on-1 Lessons →</span>
+                </button>
               </div>
             </div>
           </div>
@@ -419,17 +411,18 @@ export const ParentLandingPage: React.FC = () => {
 
                 {/* Course CTA */}
                 <div className="mt-6 pt-4 border-t border-gray-100">
-                  <a
-                    href={getWhatsAppLink(
-                      `Hello Teacher Tina! I would like details about the "${course.title.en}" course for my child.`
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleOpenContact(
+                        `Hello Teacher Tina! I would like details about the "${course.title.en}" course for my child.`
+                      )
+                    }
                     className="w-full inline-flex items-center justify-center gap-1.5 py-3 rounded-2xl bg-purple-50 hover:bg-[#6C5CE7] text-[#6C5CE7] hover:text-white font-fredoka font-bold text-xs sm:text-sm border-2 border-purple-200 hover:border-[#6C5CE7] transition-all cursor-pointer"
                   >
                     <MessageCircle size={16} />
                     <span>Inquire / Book on WhatsApp</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -481,15 +474,14 @@ export const ParentLandingPage: React.FC = () => {
                     {currentItem.desc}
                   </p>
                   <div className="pt-2">
-                    <a
-                      href={getWhatsAppLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-sm shadow-md transition-all"
+                    <button
+                      type="button"
+                      onClick={() => handleOpenContact()}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-sm shadow-md transition-all cursor-pointer"
                     >
                       <MessageCircle size={18} />
                       <span>Message Teacher Tina</span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -638,8 +630,9 @@ export const ParentLandingPage: React.FC = () => {
                 Preview Certificate 📜
               </Link>
               <button
+                type="button"
                 onClick={() => navigate('/play')}
-                className="bg-[#26324A] hover:bg-[#1A2333] text-white px-5 py-2.5 rounded-2xl font-fredoka font-bold text-xs sm:text-sm shadow-xs transition-all"
+                className="bg-[#26324A] hover:bg-[#1A2333] text-white px-5 py-2.5 rounded-2xl font-fredoka font-bold text-xs sm:text-sm shadow-xs transition-all cursor-pointer"
               >
                 Start the Quest Now 🚀
               </button>
@@ -732,39 +725,25 @@ export const ParentLandingPage: React.FC = () => {
             </p>
           </div>
 
-          {isAvailable ? (
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-xl rounded-3xl shadow-2xl border-b-6 border-[#1AA851] transform hover:scale-103 transition-all cursor-pointer"
-              >
-                <MessageCircle size={28} />
-                <span>Chat on WhatsApp</span>
-              </a>
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => handleOpenContact()}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-xl rounded-3xl shadow-2xl border-b-6 border-[#1AA851] transform hover:scale-103 transition-all cursor-pointer"
+            >
+              <MessageCircle size={28} />
+              <span>Chat on WhatsApp</span>
+            </button>
 
-              {TINA_CONFIG.email && (
-                <a
-                  href={`mailto:${TINA_CONFIG.email}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-5 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-3xl shadow-lg border-b-4 border-[#4A3EB5] transition-all"
-                >
-                  <Mail size={22} />
-                  <span>Email Teacher Tina</span>
-                </a>
-              )}
-            </div>
-          ) : (
-            <div className="bg-amber-50 p-6 rounded-3xl border-2 border-dashed border-amber-300 max-w-md mx-auto">
-              <span className="text-3xl block mb-2">📬</span>
-              <h4 className="font-fredoka text-base font-bold text-[#26324A]">
-                Contacts Coming Soon
-              </h4>
-              <p className="text-xs font-nunito font-semibold text-gray-600 mt-1">
-                Teacher Tina’s direct WhatsApp contact will be listed here soon.
-              </p>
-            </div>
-          )}
+            <button
+              type="button"
+              onClick={() => handleOpenContact()}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-5 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-3xl shadow-lg border-b-4 border-[#4A3EB5] transition-all cursor-pointer"
+            >
+              <Mail size={22} />
+              <span>Email Teacher Tina</span>
+            </button>
+          </div>
 
           <div className="pt-4 flex items-center justify-center gap-6 text-xs font-fredoka font-bold text-gray-500">
             <span className="flex items-center gap-1.5">
@@ -799,6 +778,15 @@ export const ParentLandingPage: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* ============================================================ */}
+      {/* 📱 TEACHER TINA CONTACT & BOOKING MODAL                      */}
+      {/* ============================================================ */}
+      <TeacherContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+        initialMessage={contactInitialMessage}
+      />
     </div>
   );
 };
