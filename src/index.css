@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-purple: #6C5CE7;
+  --color-brand-purple-dark: #5644D4;
+  --color-brand-gold: #FFB547;
+  --color-brand-gold-dark: #EAA030;
+  --color-brand-green: #35C98A;
+  --color-brand-green-dark: #27AD72;
+  --color-brand-blue: #40BFE8;
+  --color-brand-blue-dark: #2CAAD4;
+  --color-brand-pink: #FF7285;
+  --color-brand-pink-dark: #E65A6E;
+  --color-brand-navy: #26324A;
+  --color-brand-cream: #FFF9F0;
+  --color-brand-cream-card: #FFFFFF;
+
+  --font-fredoka: 'Fredoka', cursive, sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+}
+
+:root {
+  font-family: var(--font-nunito);
+  color: var(--color-brand-navy);
+  background-color: var(--color-brand-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Arcade Utility Styles */
+.font-fredoka {
+  font-family: var(--font-fredoka);
+}
+
+.font-nunito {
+  font-family: var(--font-nunito);
+}
+
+/* Arcade 3D tactile button shadow effects */
+.btn-3d-purple {
+  background-color: #6C5CE7;
+  border-bottom: 5px solid #5644D4;
+  transition: all 0.1s ease-in-out;
+}
+.btn-3d-purple:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-bottom-width: 6px;
+}
+.btn-3d-purple:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+
+.btn-3d-gold {
+  background-color: #FFB547;
+  border-bottom: 5px solid #EAA030;
+  transition: all 0.1s ease-in-out;
+}
+.btn-3d-gold:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-bottom-width: 6px;
+}
+.btn-3d-gold:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+
+.btn-3d-green {
+  background-color: #35C98A;
+  border-bottom: 5px solid #27AD72;
+  transition: all 0.1s ease-in-out;
+}
+.btn-3d-green:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-bottom-width: 6px;
+}
+.btn-3d-green:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+
+.btn-3d-blue {
+  background-color: #40BFE8;
+  border-bottom: 5px solid #2CAAD4;
+  transition: all 0.1s ease-in-out;
+}
+.btn-3d-blue:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-bottom-width: 6px;
+}
+.btn-3d-blue:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+
+.btn-3d-white {
+  background-color: #FFFFFF;
+  border-bottom: 5px solid #E2E8F0;
+  transition: all 0.1s ease-in-out;
+}
+.btn-3d-white:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-bottom-width: 6px;
+}
+.btn-3d-white:active:not(:disabled) {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
