@@ -23,6 +23,7 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
   const toggleReducedMotion = useGameStore((state) => state.toggleReducedMotion);
   const resetProgress = useGameStore((state) => state.resetProgress);
   const setDifficulty = useGameStore((state) => state.setDifficulty);
+  const completedLevelIds = useGameStore((state) => state.completedLevelIds);
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
@@ -119,6 +120,17 @@ export const TopHUD: React.FC<TopHUDProps> = ({ showBackHome = true }) => {
             >
               {soundEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
             </button>
+
+            {completedLevelIds.length >= 15 && (
+              <Link
+                to="/certificate"
+                className="p-1.5 sm:p-2 bg-gradient-to-tr from-[#FFD54F] to-[#FFA000] text-[#26324A] hover:brightness-105 rounded-2xl border-2 border-yellow-500 shadow-md transition-all animate-pulse text-base"
+                title="View Teacher Tina's Official Certificate"
+                aria-label="View Certificate"
+              >
+                🎓
+              </Link>
+            )}
 
             <ParentButton size="sm" />
 

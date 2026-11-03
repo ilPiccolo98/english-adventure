@@ -43,11 +43,10 @@ export const WelcomePage: React.FC = () => {
       <header className="w-full max-w-5xl mx-auto px-4 py-4 flex items-center justify-between z-10">
         <button
           onClick={toggleSound}
-          className={`px-3.5 py-2 rounded-2xl border-2 font-fredoka font-bold text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md ${
-            soundEnabled
+          className={`px-3.5 py-2 rounded-2xl border-2 font-fredoka font-bold text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md ${soundEnabled
               ? 'bg-white text-[#40BFE8] border-blue-200 hover:bg-blue-50'
               : 'bg-gray-100 text-gray-400 border-gray-300'
-          }`}
+            }`}
           title={soundEnabled ? 'Mute sound' : 'Enable sound'}
         >
           {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
@@ -94,11 +93,14 @@ export const WelcomePage: React.FC = () => {
               <span>Hi, Explorer!</span> <span>👋</span>
             </div>
             <p className="font-nunito text-sm sm:text-base text-[#26324A] font-bold mt-1 leading-snug">
-              I am Teacher Tina! Step onto the floating islands, collect golden stars, and speak English with joy!
+              I am Teacher Tina! Complete all 15 stages across the 5 magical worlds to earn your official Certificate and qualify for private 1-on-1 lessons!
             </p>
-            <div className="mt-3 flex items-center gap-2">
-              <span className="text-xs font-fredoka font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">
-                👩‍🏫 1-on-1 English Mentor
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="text-xs font-fredoka font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full border border-amber-200 flex items-center gap-1">
+                🎓 Official Certificate Quest
+              </span>
+              <span className="text-xs font-fredoka font-bold text-purple-700 bg-purple-100 px-2.5 py-1 rounded-full">
+                👩‍🏫 1-on-1 Lessons
               </span>
             </div>
           </div>

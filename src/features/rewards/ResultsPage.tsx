@@ -9,7 +9,7 @@ import { StarRating } from '../../components/ui/StarRating';
 import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
 import { ParentButton } from '../../components/game/ParentButton';
 import { Button } from '../../components/ui/Button';
-import { RotateCcw, ArrowRight, Home, Sparkles } from 'lucide-react';
+import { RotateCcw, ArrowRight, Home, Sparkles, Award } from 'lucide-react';
 import { BADGES } from '../../data/badges.data';
 
 export const ResultsPage: React.FC = () => {
@@ -19,6 +19,7 @@ export const ResultsPage: React.FC = () => {
 
   const levelInfo = getLevelById(levelId || '');
   const completeLevel = useGameStore((state) => state.completeLevel);
+  const completedLevelIds = useGameStore((state) => state.completedLevelIds);
   const reducedMotion = useGameStore((state) => state.settings.reducedMotion);
 
   const hasRecordedRef = useRef(false);
@@ -169,6 +170,35 @@ export const ResultsPage: React.FC = () => {
                 {unlockedBadgeObjs[0].description}
               </p>
             </div>
+          </div>
+        )}
+
+        {/* Grand Finale Certificate Notification */}
+        {completedLevelIds.length >= 15 && (
+          <div className="w-full bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-200 p-4 rounded-3xl border-3 border-yellow-400 shadow-lg my-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div className="flex items-center gap-3">
+              <span className="text-4xl shrink-0">🎓</span>
+              <div>
+                <span className="font-fredoka text-xs font-black text-amber-900 uppercase block">
+                  Grand Quest Completed! 🏆
+                </span>
+                <span className="font-fredoka text-base font-black text-[#26324A] block leading-tight">
+                  You Unlocked Teacher Tina's Certificate!
+                </span>
+                <span className="text-xs text-gray-700 font-nunito font-bold block leading-tight mt-0.5">
+                  Officially qualified for 1-on-1 private lessons!
+                </span>
+              </div>
+            </div>
+            <Button
+              variant="gold"
+              size="md"
+              onClick={() => navigate('/certificate')}
+              icon={<Award size={18} />}
+              className="w-full sm:w-auto shrink-0 shadow-md whitespace-nowrap"
+            >
+              CLAIM CERTIFICATE 📜
+            </Button>
           </div>
         )}
 

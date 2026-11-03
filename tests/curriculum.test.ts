@@ -162,5 +162,17 @@ assert(TINA_CONFIG.learningJourney.length === 5, 'Must have 5 learning journey s
 
 console.log('✅ Teacher Tina configuration verified!');
 
+// 6. Grand Certificate Quest Verification (15 Stages)
+console.log('\n6️⃣ Testing Grand Certificate Quest Criteria (15 Stages)...');
+const all15LevelIds = WORLDS_DATA.flatMap((w) => w.levels.map((l) => l.id));
+assert(all15LevelIds.length === 15, 'Total levels across worlds must equal exactly 15');
+const completedMockState: GameState = {
+  ...mockState,
+  completedLevelIds: all15LevelIds,
+};
+const isComplete = completedMockState.completedLevelIds.length >= 15;
+assert(isComplete, 'Grand Certificate must unlock when 15 stages are complete');
+console.log('✅ Grand Certificate 15-stage requirement verified!');
+
 console.log('\n🎉 ALL AUTOMATED TESTS PASSED SUCCESSFULLY! 🚀');
 

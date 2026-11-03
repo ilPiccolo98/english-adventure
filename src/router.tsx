@@ -7,6 +7,7 @@ import { WorldDetailPage } from './features/worlds/WorldDetailPage';
 import { ExercisePage } from './features/exercises/ExercisePage';
 import { ResultsPage } from './features/rewards/ResultsPage';
 import { TeacherPage } from './features/teacher/TeacherPage';
+import { CertificatePage } from './features/certificate/CertificatePage';
 
 // We use createHashRouter for 100% reliable static hosting on GitHub Pages / Cloudflare Pages
 // without requiring complex server-side fallback rules!
@@ -38,6 +39,10 @@ const router = createHashRouter([
   {
     path: '/parents',
     element: <TeacherPage />,
+  },
+  {
+    path: '/certificate',
+    element: <CertificatePage />,
   },
   {
     path: '*',

@@ -4,6 +4,7 @@ import { TopHUD } from '../../components/game/TopHUD';
 import { WORLDS_DATA } from '../../data/worlds.data';
 import { useGameStore } from '../../store/game.store';
 import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
+import { CertificateQuestCard } from '../../components/game/CertificateQuestCard';
 import { WorldIslandIllustration } from '../../components/game/WorldIslandIllustration';
 import { BadgesModal } from '../rewards/BadgesModal';
 import { Award, ArrowRight, Star, Sparkles, CheckCircle2, Volume2 } from 'lucide-react';
@@ -60,6 +61,11 @@ export const WorldMapPage: React.FC = () => {
             <Award size={20} />
             <span>Badges</span>
           </button>
+        </div>
+
+        {/* Certificate Grand Quest Motivation Banner */}
+        <div className="w-full flex justify-center mb-6">
+          <CertificateQuestCard completedCount={completedLevelIds.length} />
         </div>
 
         {/* 5 Floating Island Cards on Winding Arcade Trail */}

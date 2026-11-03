@@ -69,7 +69,7 @@ export const PlayerSetupPage: React.FC = () => {
               Teacher Tina says: <Sparkles size={14} className="text-[#FFB547] fill-[#FFB547]" />
             </span>
             <p className="font-nunito text-xs sm:text-sm font-bold text-[#26324A] leading-snug mt-0.5">
-              "Welcome to English class, Explorer! Pick your hero and let's get ready for adventure!"
+              "Welcome to English class, Explorer! Pick your hero, complete all 15 stages, and win your official Certificate to qualify for 1-on-1 private lessons!"
             </p>
           </div>
         </div>
