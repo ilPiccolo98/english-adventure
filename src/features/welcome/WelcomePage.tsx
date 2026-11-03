@@ -43,10 +43,11 @@ export const WelcomePage: React.FC = () => {
       <header className="w-full max-w-5xl mx-auto px-4 py-4 flex items-center justify-between z-10">
         <button
           onClick={toggleSound}
-          className={`px-3.5 py-2 rounded-2xl border-2 font-fredoka font-bold text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md ${soundEnabled
+          className={`px-3.5 py-2 rounded-2xl border-2 font-fredoka font-bold text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md ${
+            soundEnabled
               ? 'bg-white text-[#40BFE8] border-blue-200 hover:bg-blue-50'
               : 'bg-gray-100 text-gray-400 border-gray-300'
-            }`}
+          }`}
           title={soundEnabled ? 'Mute sound' : 'Enable sound'}
         >
           {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
