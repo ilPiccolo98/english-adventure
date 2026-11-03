@@ -715,11 +715,11 @@ export const ParentLandingPage: React.FC = () => {
       {/* ============================================================ */}
       <section className="w-full py-16 px-4 bg-gradient-to-b from-white via-purple-50 to-pink-50 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
-          <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#6C5CE7] mx-auto shadow-xl bg-purple-100">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-[#6C5CE7] mx-auto shadow-xl bg-purple-100 ring-4 ring-purple-200/60">
             <img
               src={TINA_CONFIG.realPhotos.portrait}
               alt="Teacher Tina"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-[center_35%]"
             />
           </div>
 
