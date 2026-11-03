@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Award, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
+import { Award, ChevronRight, Sparkles } from 'lucide-react';
 import { TINA_CONFIG } from '../../data/teacher.config';
 
 interface CertificateQuestCardProps {

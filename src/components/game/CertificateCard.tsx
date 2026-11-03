@@ -2,7 +2,7 @@ import React from 'react';
 import type { AvatarId, Difficulty } from '../../types/game.types';
 import { AvatarDisplay } from '../icons/GameIcons';
 import { TINA_CONFIG } from '../../data/teacher.config';
-import { Star, Award, CheckCircle2, Sparkles } from 'lucide-react';
+import { Award, CheckCircle2, Sparkles } from 'lucide-react';
 
 interface CertificateCardProps {
   playerName: string;
@@ -20,13 +20,17 @@ export const CertificateCard: React.FC<CertificateCardProps> = ({
   totalStars,
   totalCoins,
   difficulty = 'little',
-  completionDate = new Date().toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  }),
+  completionDate,
   className = '',
 }) => {
+  const [formattedDate] = React.useState(() => {
+    if (completionDate) return completionDate;
+    return new Date().toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  });
   return (
     <div
       id="certificate-print-area"
@@ -128,7 +132,7 @@ export const CertificateCard: React.FC<CertificateCardProps> = ({
               Date of Issue
             </span>
             <span className="font-fredoka text-xs sm:text-sm font-bold text-[#26324A] block">
-              {completionDate}
+              {formattedDate}
             </span>
             <span className="text-[10px] text-emerald-600 font-bold block flex items-center gap-0.5">
               <Sparkles size={10} /> Verified Record
