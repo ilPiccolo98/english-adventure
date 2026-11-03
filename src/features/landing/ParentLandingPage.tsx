@@ -6,18 +6,17 @@ import {
   CheckCircle2,
   Award,
   Sparkles,
-  Heart,
   ChevronDown,
   Gamepad2,
   ArrowRight,
   ShieldCheck,
   Star,
+  Heart,
 } from 'lucide-react';
 import { TINA_CONFIG } from '../../data/teacher.config';
 import { KidsArcadePlaque } from '../../components/landing/KidsArcadePlaque';
 
 export const ParentLandingPage: React.FC = () => {
-  const [lang, setLang] = useState<'it' | 'en'>('it');
   const [activePhotoKey, setActivePhotoKey] = useState<
     'welcoming' | 'standing' | 'blackboard' | 'guidance' | 'portrait'
   >('welcoming');
@@ -29,9 +28,7 @@ export const ParentLandingPage: React.FC = () => {
     if (!TINA_CONFIG.whatsappNumber) return '#';
     const baseText =
       customText ||
-      (lang === 'it'
-        ? 'Ciao Teacher Tina! Ho visto la pagina dei corsi e vorrei informazioni sulle lezioni individuali di inglese per mio figlio/a.'
-        : 'Hello Teacher Tina! I saw your English courses and would like to ask about 1-on-1 private lessons for my child.');
+      'Hello Teacher Tina! I saw your English courses page and would like to ask about 1-on-1 private lessons for my child.';
     const text = encodeURIComponent(baseText);
     return `https://wa.me/${TINA_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${text}`;
   };
@@ -44,69 +41,39 @@ export const ParentLandingPage: React.FC = () => {
     {
       key: 'welcoming' as const,
       src: TINA_CONFIG.realPhotos.welcoming,
-      title: {
-        it: 'Accoglienza e Materiali Didattici',
-        en: 'Warm Welcome & Course Books',
-      },
-      desc: {
-        it: 'Teacher Tina accoglie i bambini con entusiasmo e materiali illustrati a misura di bambino.',
-        en: 'Teacher Tina welcomes young learners with vibrant illustrated books.',
-      },
+      title: 'Warm Welcome & Course Books',
+      desc: 'Teacher Tina welcomes young learners with vibrant illustrated books and high enthusiasm.',
     },
     {
       key: 'blackboard' as const,
       src: TINA_CONFIG.realPhotos.blackboard,
-      title: {
-        it: 'Spiegazione Interattiva alla Lavagna',
-        en: 'Interactive Blackboard Teaching',
-      },
-      desc: {
-        it: 'Vocaboli e fonetica presentati chiaramente con supporto bilingue (Inglese / Arabo).',
-        en: 'Phonics and vocabulary clearly taught with bilingual English & Arabic support.',
-      },
+      title: 'Interactive Blackboard Teaching',
+      desc: 'Phonics and vocabulary clearly taught with bilingual English & Arabic visual support on the board.',
     },
     {
       key: 'guidance' as const,
       src: TINA_CONFIG.realPhotos.guidance,
-      title: {
-        it: 'Guida Individuale al Tavolo',
-        en: 'Personalized Table Guidance',
-      },
-      desc: {
-        it: 'Attenzione paziente per ogni esercizio: ogni bambino è seguito passo dopo passo.',
-        en: 'Gentle, patient guidance: each child is supported step-by-step.',
-      },
+      title: 'Personalized Table Guidance',
+      desc: 'Gentle, patient guidance: each child is supported step-by-step through their workbook.',
     },
     {
       key: 'standing' as const,
       src: TINA_CONFIG.realPhotos.standing,
-      title: {
-        it: 'Ambiente di Classe Positivo',
-        en: 'Positive Classroom Atmosphere',
-      },
-      desc: {
-        it: 'Uno spazio sicuro, allegro e stimolante dove la paura di sbagliare scompare.',
-        en: 'A safe, joyful learning space where the fear of mistakes disappears.',
-      },
+      title: 'Positive Classroom Atmosphere',
+      desc: 'A safe, joyful learning environment where the fear of making mistakes disappears.',
     },
     {
       key: 'portrait' as const,
       src: TINA_CONFIG.realPhotos.portrait,
-      title: {
-        it: 'Sintonia e Fiducia con i Bambini',
-        en: 'Trust & Rapport with Children',
-      },
-      desc: {
-        it: 'Un rapporto empatico e incoraggiante che trasforma l’inglese in una passione spontanea.',
-        en: 'An empathetic relationship turning English into an effortless joy.',
-      },
+      title: 'Trust & Rapport with Children',
+      desc: 'A warm, empathetic mentor turning English into an effortless, lifelong passion.',
     },
   ];
 
   return (
     <div className="min-h-screen w-full bg-[#FFFDF9] text-[#26324A] font-nunito flex flex-col selection:bg-purple-200">
       {/* ============================================================ */}
-      {/* 🧭 TOP NAVBAR (Navigation, Language Switcher & Direct CTA)   */}
+      {/* 🧭 TOP NAVBAR (Navigation & Direct Actions)                 */}
       {/* ============================================================ */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-2xs">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
@@ -128,63 +95,47 @@ export const ParentLandingPage: React.FC = () => {
           {/* Center Quick Jump Links (Desktop) */}
           <nav className="hidden lg:flex items-center gap-6 font-fredoka text-sm font-bold text-gray-600">
             <a href="#method" className="hover:text-[#6C5CE7] transition-colors">
-              {lang === 'it' ? 'Il Metodo' : 'Method'}
+              The Method
             </a>
             <a href="#courses" className="hover:text-[#6C5CE7] transition-colors">
-              {lang === 'it' ? 'Corsi & Età' : 'Courses'}
+              Courses & Ages
             </a>
             <a href="#gallery" className="hover:text-[#6C5CE7] transition-colors">
-              {lang === 'it' ? 'Foto Reali' : 'Classroom'}
+              Classroom Photos
             </a>
             <a href="#why-1on1" className="hover:text-[#6C5CE7] transition-colors">
-              {lang === 'it' ? 'Perché 1-on-1' : 'Why 1-on-1'}
+              Why 1-on-1?
             </a>
             <a href="#certificate-info" className="hover:text-[#6C5CE7] transition-colors">
-              {lang === 'it' ? 'Certificato' : 'Certificate'}
+              Grand Certificate
             </a>
             <a href="#faq" className="hover:text-[#6C5CE7] transition-colors">
               FAQ
             </a>
           </nav>
 
-          {/* Right: Language Toggle & Kid Button Link */}
+          {/* Right: Quick Action Buttons */}
           <div className="flex items-center gap-2.5">
-            {/* Language Toggle Button */}
-            <div className="bg-gray-100 p-1 rounded-2xl flex items-center border border-gray-200">
-              <button
-                type="button"
-                onClick={() => setLang('it')}
-                className={`px-2.5 py-1 rounded-xl text-xs font-fredoka font-bold transition-all cursor-pointer ${
-                  lang === 'it'
-                    ? 'bg-white text-[#6C5CE7] shadow-xs'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                🇮🇹 IT
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('en')}
-                className={`px-2.5 py-1 rounded-xl text-xs font-fredoka font-bold transition-all cursor-pointer ${
-                  lang === 'en'
-                    ? 'bg-white text-[#6C5CE7] shadow-xs'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                🇬🇧 EN
-              </button>
-            </div>
-
             {/* Quick Play Anchor Button */}
             <a
               href="#kids-play-zone"
-              className="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs flex items-center gap-1.5 transition-all shadow-2xs"
+              className="bg-amber-100 hover:bg-amber-200 text-amber-950 border-2 border-amber-300 px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs flex items-center gap-1.5 transition-all shadow-2xs"
             >
               <Gamepad2 size={16} />
-              <span className="hidden sm:inline">
-                {lang === 'it' ? 'Area Bambini' : 'Kids Play'}
-              </span>
+              <span>Kids Play Zone</span>
             </a>
+
+            {isAvailable && (
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs shadow-xs transition-all"
+              >
+                <MessageCircle size={16} />
+                <span>WhatsApp</span>
+              </a>
+            )}
           </div>
         </div>
       </header>
@@ -192,7 +143,7 @@ export const ParentLandingPage: React.FC = () => {
       {/* ============================================================ */}
       {/* 🧒 TOP ARCADE HERO PLAQUE (Central Kid Button: Free to Play) */}
       {/* ============================================================ */}
-      <KidsArcadePlaque lang={lang} />
+      <KidsArcadePlaque />
 
       {/* ============================================================ */}
       {/* 👨‍👩‍👧 PARENT HERO SECTION (Value Proposition & Trust)          */}
@@ -203,35 +154,18 @@ export const ParentLandingPage: React.FC = () => {
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-purple-100 text-[#6C5CE7] px-4 py-1.5 rounded-full text-xs sm:text-sm font-fredoka font-black uppercase tracking-wider shadow-2xs">
               <Sparkles size={16} />
-              <span>
-                {lang === 'it'
-                  ? 'LEZIONI INDIVIDUALI 1-ON-1 & VIDEOGIOCO INTERATTIVO'
-                  : 'INDIVIDUAL 1-ON-1 LESSONS & INTERACTIVE GAME'}
-              </span>
+              <span>INDIVIDUAL 1-ON-1 LESSONS & INTERACTIVE GAME</span>
             </div>
 
             <h1 className="font-fredoka text-3xl sm:text-5xl lg:text-6xl font-black text-[#26324A] leading-[1.15] tracking-tight">
-              {lang === 'it' ? (
-                <>
-                  Fai innamorare tuo figlio dell'inglese con{' '}
-                  <span className="text-[#6C5CE7] underline decoration-amber-400 decoration-wavy">
-                    Teacher Tina
-                  </span>
-                </>
-              ) : (
-                <>
-                  Help your child fall in love with English with{' '}
-                  <span className="text-[#6C5CE7] underline decoration-amber-400 decoration-wavy">
-                    Teacher Tina
-                  </span>
-                </>
-              )}
+              Help Your Child Fall in Love with English with{' '}
+              <span className="text-[#6C5CE7] underline decoration-amber-400 decoration-wavy">
+                Teacher Tina
+              </span>
             </h1>
 
             <p className="font-nunito text-base sm:text-lg text-gray-600 font-semibold leading-relaxed max-w-xl mx-auto lg:mx-0">
-              {lang === 'it'
-                ? 'Un metodo innovativo a due pilastri per bambini dai 5 ai 10 anni: pratica autonoma e divertente con il nostro videogioco arcade 2D + lezioni private 1-on-1 per sviluppare pronuncia autentica e sicurezza nel parlato.'
-                : 'A joyful 2-pillar learning approach for children aged 5 to 10: autonomous practice through our 2D arcade video game + personalized 1-on-1 private lessons for real pronunciation and conversational confidence.'}
+              A proven, joyful 2-pillar learning approach for children aged 5 to 10: autonomous practice through our 2D arcade video game + personalized 1-on-1 private lessons for authentic pronunciation and conversational confidence.
             </p>
 
             {/* Key Trust Checkmarks */}
@@ -239,33 +173,25 @@ export const ParentLandingPage: React.FC = () => {
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={18} className="text-[#35C98A] shrink-0" />
                 <span className="font-fredoka font-bold text-xs sm:text-sm text-gray-700">
-                  {lang === 'it'
-                    ? '100% Attenzione Individuale (Zero gruppi)'
-                    : '100% Individual Attention (No groups)'}
+                  100% Individual Attention (No Crowded Groups)
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={18} className="text-[#35C98A] shrink-0" />
                 <span className="font-fredoka font-bold text-xs sm:text-sm text-gray-700">
-                  {lang === 'it'
-                    ? 'Insegnante Certificata di Inglese'
-                    : 'Certified English Teacher'}
+                  Certified English Teacher for Children
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={18} className="text-[#35C98A] shrink-0" />
                 <span className="font-fredoka font-bold text-xs sm:text-sm text-gray-700">
-                  {lang === 'it'
-                    ? 'Supporto Fonetico Mirato (Es. P/B, V/F)'
-                    : 'Phonics Care for Arabic Learners'}
+                  Specialized Phonics Care (e.g. P/B, V/F)
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={18} className="text-[#35C98A] shrink-0" />
                 <span className="font-fredoka font-bold text-xs sm:text-sm text-gray-700">
-                  {lang === 'it'
-                    ? 'Metodo Gentile Senza Pressione'
-                    : 'Joyful & Gentle, Non-Punitive'}
+                  Joyful, Gentle & Non-Punitive Approach
                 </span>
               </div>
             </div>
@@ -280,16 +206,14 @@ export const ParentLandingPage: React.FC = () => {
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-lg rounded-2xl shadow-xl border-b-4 border-[#1AA851] transform hover:scale-102 transition-all cursor-pointer"
                 >
                   <MessageCircle size={24} />
-                  <span>
-                    {lang === 'it' ? 'Scrivi a Teacher Tina su WhatsApp' : 'Chat with Teacher Tina'}
-                  </span>
+                  <span>Chat with Teacher Tina on WhatsApp</span>
                 </a>
               ) : (
                 <a
                   href="#courses"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-base rounded-2xl shadow-lg border-b-4 border-[#4A3EB5] transition-all"
                 >
-                  <span>{lang === 'it' ? 'Scopri i Corsi e Dettagli' : 'Explore Courses'}</span>
+                  <span>Explore Courses & Details</span>
                   <ArrowRight size={18} />
                 </a>
               )}
@@ -299,9 +223,7 @@ export const ParentLandingPage: React.FC = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 bg-white hover:bg-gray-50 text-[#6C5CE7] border-2 border-purple-200 font-fredoka font-bold text-base rounded-2xl shadow-xs transition-all"
               >
                 <Gamepad2 size={20} />
-                <span>
-                  {lang === 'it' ? 'Fai Provare il Gioco al Bambino' : 'Let Your Child Play First'}
-                </span>
+                <span>Let Your Child Play First</span>
               </button>
             </div>
           </div>
@@ -326,13 +248,11 @@ export const ParentLandingPage: React.FC = () => {
                       Teacher Tina
                     </span>
                     <span className="text-xs font-nunito font-bold text-gray-500 block">
-                      {lang === 'it'
-                        ? 'Docente Certificata & Esperta per Bambini'
-                        : 'Certified English Teacher for Children'}
+                      Certified English Teacher for Children
                     </span>
                   </div>
                   <span className="text-xs font-fredoka font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
-                    {lang === 'it' ? '1-on-1 Disponibile' : '1-on-1 Ready'}
+                    1-on-1 Lessons Ready
                   </span>
                 </div>
               </div>
@@ -348,17 +268,13 @@ export const ParentLandingPage: React.FC = () => {
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="font-fredoka text-xs sm:text-sm font-black text-[#6C5CE7] bg-purple-50 px-4 py-1.5 rounded-full uppercase tracking-wider border border-purple-100">
-              {lang === 'it' ? 'Il Metodo a Doppio Pilastro' : 'The Two-Pillar Method'}
+              The Two-Pillar Method
             </span>
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A]">
-              {lang === 'it'
-                ? 'Perché unire il Videogioco alle Lezioni 1-on-1?'
-                : 'Why Combine the Video Game with 1-on-1 Lessons?'}
+              Why Combine the Video Game with 1-on-1 Lessons?
             </h2>
             <p className="font-nunito text-sm sm:text-base text-gray-600 font-semibold leading-relaxed">
-              {lang === 'it'
-                ? 'I bambini imparano più in fretta quando si sentono protagonisti. Ecco come il gioco e le lezioni private si completano alla perfezione:'
-                : 'Children learn fastest when learning feels natural and fun. Here is how our game and private tutoring work together:'}
+              Children learn fastest when learning feels natural, playful, and empowering. Here is how autonomous gaming and private tutoring work hand-in-hand:
             </p>
           </div>
 
@@ -370,37 +286,23 @@ export const ParentLandingPage: React.FC = () => {
                   🎮
                 </div>
                 <h3 className="font-fredoka text-2xl font-black text-[#26324A]">
-                  {lang === 'it' ? '1. Il Videogioco Interattivo' : '1. The Interactive Video Game'}
+                  1. The Interactive Video Game
                 </h3>
                 <p className="font-nunito text-sm text-gray-700 font-semibold leading-relaxed">
-                  {lang === 'it'
-                    ? 'Tuo figlio gioca in autonomia esplorando 5 mondi tematici (Vocabolario, Grammatica, Pronuncia, Lettura, Ascolto) con 150 attività vocali native in studio, vincendo stelle e il Gran Certificato finale.'
-                    : 'Your child plays independently through 5 magical worlds (Vocabulary, Grammar, Pronunciation, Reading, Listening) with 150 studio-recorded English voice challenges, earning stars and the Grand Diploma.'}
+                  Your child explores 5 magical worlds (Vocabulary, Grammar, Pronunciation, Reading, Listening) with 150 studio-recorded English voice activities, collecting stars and aiming for the Grand Diploma.
                 </p>
                 <ul className="space-y-2 pt-2 text-xs sm:text-sm font-fredoka font-bold text-gray-800">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-amber-600 shrink-0" />
-                    <span>
-                      {lang === 'it'
-                        ? 'Zero pressione, zero punteggi negativi'
-                        : 'Non-punitive, zero fear of mistakes'}
-                    </span>
+                    <span>Zero pressure, non-punitive feedback</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-amber-600 shrink-0" />
-                    <span>
-                      {lang === 'it'
-                        ? '110 audio nativi inglesi registrati'
-                        : '110 native English studio audio files'}
-                    </span>
+                    <span>110 native studio English voice files</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-amber-600 shrink-0" />
-                    <span>
-                      {lang === 'it'
-                        ? '100% gratuito e senza pubblicità'
-                        : '100% free with no distracting ads'}
-                    </span>
+                    <span>100% free with no distracting ads</span>
                   </li>
                 </ul>
               </div>
@@ -411,7 +313,7 @@ export const ParentLandingPage: React.FC = () => {
                   className="font-fredoka font-bold text-xs text-amber-900 bg-amber-200/80 hover:bg-amber-300 px-4 py-2 rounded-xl transition-all flex items-center gap-1.5"
                 >
                   <Gamepad2 size={16} />
-                  <span>{lang === 'it' ? 'Avvia il Gioco Subito →' : 'Launch Game Now →'}</span>
+                  <span>Launch Game Now →</span>
                 </button>
               </div>
             </div>
@@ -423,37 +325,23 @@ export const ParentLandingPage: React.FC = () => {
                   👩‍🏫
                 </div>
                 <h3 className="font-fredoka text-2xl font-black text-[#26324A]">
-                  {lang === 'it' ? '2. Le Lezioni Private 1-on-1' : '2. 1-on-1 Private Lessons'}
+                  2. 1-on-1 Private Lessons
                 </h3>
                 <p className="font-nunito text-sm text-gray-700 font-semibold leading-relaxed">
-                  {lang === 'it'
-                    ? 'Con Teacher Tina in videochiamata privata, il bambino mette in pratica tutto ciò che ha visto nel gioco. Niente classi rumorose: ogni minuto è dedicato a stimolare la conversazione e la sicurezza.'
-                    : 'In live private video sessions, Teacher Tina unlocks conversational speaking. No noisy classrooms: every minute is tailored to ignite confidence and spontaneous communication.'}
+                  In private live video calls with Teacher Tina, your child activates everything learned in the game into natural, spoken communication. Every minute is tailored to their personality, eliminating shyness and hesitation.
                 </p>
                 <ul className="space-y-2 pt-2 text-xs sm:text-sm font-fredoka font-bold text-gray-800">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-[#6C5CE7] shrink-0" />
-                    <span>
-                      {lang === 'it'
-                        ? 'Il bambino parla l’80% del tempo'
-                        : 'Child speaks 80% of total lesson time'}
-                    </span>
+                    <span>Child speaks 80% of total lesson time</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-[#6C5CE7] shrink-0" />
-                    <span>
-                      {lang === 'it'
-                        ? 'Correzione fonetica gentile in tempo reale'
-                        : 'Real-time gentle phonetics correction'}
-                    </span>
+                    <span>Immediate, gentle pronunciation correction</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-[#6C5CE7] shrink-0" />
-                    <span>
-                      {lang === 'it'
-                        ? 'Piano didattico personalizzato su misura'
-                        : 'Custom learning pace adapted to your child'}
-                    </span>
+                    <span>Personalized pace tailored to your child</span>
                   </li>
                 </ul>
               </div>
@@ -466,9 +354,7 @@ export const ParentLandingPage: React.FC = () => {
                   className="font-fredoka font-bold text-xs text-purple-900 bg-purple-200/80 hover:bg-purple-300 px-4 py-2 rounded-xl transition-all inline-flex items-center gap-1.5"
                 >
                   <MessageCircle size={16} />
-                  <span>
-                    {lang === 'it' ? 'Richiedi Info su WhatsApp →' : 'Inquire on WhatsApp →'}
-                  </span>
+                  <span>Inquire on WhatsApp →</span>
                 </a>
               </div>
             </div>
@@ -483,17 +369,13 @@ export const ParentLandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="font-fredoka text-xs sm:text-sm font-black text-amber-900 bg-amber-100 px-4 py-1.5 rounded-full uppercase tracking-wider border border-amber-200">
-              {lang === 'it' ? 'Programmi su Misura' : 'Customized Programs'}
+              Customized Programs
             </span>
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A]">
-              {lang === 'it'
-                ? 'I Corsi Individuali di Teacher Tina'
-                : 'Teacher Tina’s 1-on-1 English Courses'}
+              Teacher Tina’s 1-on-1 English Courses
             </h2>
             <p className="font-nunito text-sm sm:text-base text-gray-600 font-semibold leading-relaxed">
-              {lang === 'it'
-                ? 'Ogni percorso è studiato specificamente per le diverse fasi cognitive dei bambini, con enfasi su conversazione, fonetica e sicurezza.'
-                : 'Every course track is carefully tailored to your child’s cognitive stage, prioritizing conversation, phonics, and genuine confidence.'}
+              Each learning track is specifically designed for your child’s cognitive developmental stage, prioritizing active speaking, phonics, and genuine confidence.
             </p>
           </div>
 
@@ -517,16 +399,16 @@ export const ParentLandingPage: React.FC = () => {
                       {course.badge}
                     </span>
                     <h3 className="font-fredoka text-xl font-black text-[#26324A] mt-1 leading-snug">
-                      {course.title[lang]}
+                      {course.title.en}
                     </h3>
                     <p className="font-nunito text-xs text-gray-600 font-bold mt-1.5 leading-relaxed">
-                      {course.tagline[lang]}
+                      {course.tagline.en}
                     </p>
                   </div>
 
                   {/* Feature Checkmarks */}
                   <ul className="space-y-2 pt-2 border-t border-gray-100">
-                    {course.features[lang].map((feat, idx) => (
+                    {course.features.en.map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs font-bold text-gray-700">
                         <CheckCircle2 size={15} className="text-[#35C98A] shrink-0 mt-0.5" />
                         <span>{feat}</span>
@@ -539,16 +421,14 @@ export const ParentLandingPage: React.FC = () => {
                 <div className="mt-6 pt-4 border-t border-gray-100">
                   <a
                     href={getWhatsAppLink(
-                      lang === 'it'
-                        ? `Ciao Teacher Tina! Vorrei informazioni sul corso "${course.title.it}" per mio figlio.`
-                        : `Hello Teacher Tina! I would like details about the "${course.title.en}" course for my child.`
+                      `Hello Teacher Tina! I would like details about the "${course.title.en}" course for my child.`
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-1.5 py-3 rounded-2xl bg-purple-50 hover:bg-[#6C5CE7] text-[#6C5CE7] hover:text-white font-fredoka font-bold text-xs sm:text-sm border-2 border-purple-200 hover:border-[#6C5CE7] transition-all cursor-pointer"
                   >
                     <MessageCircle size={16} />
-                    <span>{lang === 'it' ? 'Prenota / Chiedi Info' : 'Inquire / Book'}</span>
+                    <span>Inquire / Book on WhatsApp</span>
                   </a>
                 </div>
               </div>
@@ -564,17 +444,13 @@ export const ParentLandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="font-fredoka text-xs sm:text-sm font-black text-[#6C5CE7] bg-purple-50 px-4 py-1.5 rounded-full uppercase tracking-wider border border-purple-100">
-              {lang === 'it' ? 'Foto Autentiche in Classe' : 'Real Classroom Photos'}
+              Real Classroom Moments
             </span>
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A]">
-              {lang === 'it'
-                ? 'All’Interno della Classe di Teacher Tina'
-                : 'Inside Teacher Tina’s Real Classroom'}
+              Inside Teacher Tina’s Real Classroom
             </h2>
             <p className="font-nunito text-sm sm:text-base text-gray-600 font-semibold leading-relaxed">
-              {lang === 'it'
-                ? 'Nessuna immagine finta: ecco Teacher Tina all’opera con i suoi piccoli studenti, tra quaderni, lavagna e tanta allegria.'
-                : 'No generic stock photos: see Teacher Tina in action with her young learners, engaging with textbooks, blackboard activities, and smiling faces.'}
+              No generic stock photos: see Teacher Tina in action with her young learners, engaging with textbooks, interactive blackboard activities, and smiling faces.
             </p>
           </div>
 
@@ -587,20 +463,20 @@ export const ParentLandingPage: React.FC = () => {
                 <div className="md:col-span-7 rounded-2xl overflow-hidden shadow-lg border-3 border-white max-h-96 bg-gray-100">
                   <img
                     src={currentItem.src}
-                    alt={currentItem.title[lang]}
+                    alt={currentItem.title}
                     className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-300"
                   />
                 </div>
                 <div className="md:col-span-5 space-y-4 text-center md:text-left">
                   <div className="inline-flex items-center gap-1.5 text-xs font-fredoka font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
                     <Star size={14} className="fill-amber-600" />
-                    <span>{lang === 'it' ? 'Scatto dal Vivo' : 'Live Classroom'}</span>
+                    <span>Real Classroom Snapshot</span>
                   </div>
                   <h3 className="font-fredoka text-2xl font-black text-[#26324A]">
-                    {currentItem.title[lang]}
+                    {currentItem.title}
                   </h3>
                   <p className="font-nunito text-sm text-gray-700 font-bold leading-relaxed">
-                    {currentItem.desc[lang]}
+                    {currentItem.desc}
                   </p>
                   <div className="pt-2">
                     <a
@@ -610,7 +486,7 @@ export const ParentLandingPage: React.FC = () => {
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-xs sm:text-sm shadow-md"
                     >
                       <MessageCircle size={16} />
-                      <span>{lang === 'it' ? 'Scrivi a Teacher Tina' : 'Message Teacher Tina'}</span>
+                      <span>Message Teacher Tina</span>
                     </a>
                   </div>
                 </div>
@@ -634,12 +510,12 @@ export const ParentLandingPage: React.FC = () => {
                 <div className="w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gray-100">
                   <img
                     src={photo.src}
-                    alt={photo.title[lang]}
+                    alt={photo.title}
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
                 <span className="font-fredoka text-xs font-bold text-[#26324A] text-center line-clamp-1">
-                  {photo.title[lang]}
+                  {photo.title}
                 </span>
               </button>
             ))}
@@ -654,17 +530,13 @@ export const ParentLandingPage: React.FC = () => {
         <div className="max-w-4xl mx-auto space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="font-fredoka text-xs sm:text-sm font-black text-emerald-800 bg-emerald-100 px-4 py-1.5 rounded-full uppercase tracking-wider border border-emerald-200">
-              {lang === 'it' ? 'Il Vantaggio Esclusivo' : 'The Individual Advantage'}
+              The Individual Advantage
             </span>
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A]">
-              {lang === 'it'
-                ? 'Perché Scegliere Solo Lezioni 1-on-1?'
-                : 'Why Choose Exclusively 1-on-1 Lessons?'}
+              Why Choose Exclusively 1-on-1 Lessons?
             </h2>
             <p className="font-nunito text-sm sm:text-base text-gray-600 font-semibold leading-relaxed">
-              {lang === 'it'
-                ? 'Nei primi anni di apprendimento linguistico, la sicurezza nel parlare fa tutta la differenza:'
-                : 'In the formative years of language learning, speaking confidence makes all the difference:'}
+              In the crucial early years of language acquisition, active speaking practice makes all the difference:
             </p>
           </div>
 
@@ -673,67 +545,59 @@ export const ParentLandingPage: React.FC = () => {
               <thead>
                 <tr className="border-b-2 border-gray-100 text-xs sm:text-sm font-fredoka font-black">
                   <th className="py-3 px-3 text-gray-500">
-                    {lang === 'it' ? 'Aspetto Didattico' : 'Feature'}
+                    Teaching Feature
                   </th>
                   <th className="py-3 px-3 text-red-500 bg-red-50/50 rounded-t-xl text-center">
-                    {lang === 'it' ? 'Corsi di Gruppo (15–20 bambini)' : 'Group Classes (15–20 kids)'}
+                    Group Classes (15–20 kids)
                   </th>
                   <th className="py-3 px-3 text-[#6C5CE7] bg-purple-50 rounded-t-xl text-center">
-                    {lang === 'it'
-                      ? '⭐ Teacher Tina 1-on-1 Privato'
-                      : '⭐ Teacher Tina 1-on-1 Private'}
+                    ⭐ Teacher Tina 1-on-1 Private
                   </th>
                 </tr>
               </thead>
               <tbody className="text-xs sm:text-sm font-nunito font-bold divide-y divide-gray-100">
                 <tr>
                   <td className="py-3.5 px-3 text-[#26324A]">
-                    {lang === 'it' ? 'Tempo effettivo di conversazione' : 'Speaking time per child'}
+                    Speaking time per child
                   </td>
                   <td className="py-3.5 px-3 text-center text-red-600 bg-red-50/20">
-                    {lang === 'it' ? '2–3 minuti per ora' : '2–3 minutes per hour'}
+                    2–3 minutes per hour
                   </td>
                   <td className="py-3.5 px-3 text-center text-[#6C5CE7] bg-purple-50/50 font-black">
-                    {lang === 'it' ? '80% della lezione (Attivo)' : '80% of entire lesson (Active)'}
+                    80% of entire lesson (Active speaking)
                   </td>
                 </tr>
                 <tr>
                   <td className="py-3.5 px-3 text-[#26324A]">
-                    {lang === 'it' ? 'Ritmo di apprendimento' : 'Learning pace'}
+                    Learning pace
                   </td>
                   <td className="py-3.5 px-3 text-center text-red-600 bg-red-50/20">
-                    {lang === 'it' ? 'Rigido per tutti' : 'Rigid, one-size-fits-all'}
+                    Rigid, one-size-fits-all
                   </td>
                   <td className="py-3.5 px-3 text-center text-[#6C5CE7] bg-purple-50/50 font-black">
-                    {lang === 'it'
-                      ? 'Adattato al secondo sul tuo bambino'
-                      : '100% personalized to your child'}
+                    100% personalized to your child’s speed
                   </td>
                 </tr>
                 <tr>
                   <td className="py-3.5 px-3 text-[#26324A]">
-                    {lang === 'it' ? 'Bambini timidi o insicuri' : 'Shy or hesitant learners'}
+                    Shy or hesitant learners
                   </td>
                   <td className="py-3.5 px-3 text-center text-red-600 bg-red-50/20">
-                    {lang === 'it' ? 'Restano spesso in silenzio' : 'Often stay quiet and passive'}
+                    Often stay quiet and passive
                   </td>
                   <td className="py-3.5 px-3 text-center text-[#6C5CE7] bg-purple-50/50 font-black">
-                    {lang === 'it'
-                      ? 'Rassicurati con affetto e pazienza'
-                      : 'Gentle, nurturing encouragement'}
+                    Nurtured with patience, warmth & praise
                   </td>
                 </tr>
                 <tr>
                   <td className="py-3.5 px-3 text-[#26324A]">
-                    {lang === 'it' ? 'Correzione della pronuncia' : 'Phonics & Accent correction'}
+                    Phonics & Accent correction
                   </td>
                   <td className="py-3.5 px-3 text-center text-red-600 bg-red-50/20">
-                    {lang === 'it' ? 'Generica o assente' : 'Overlooked in crowd'}
+                    Overlooked in the crowd
                   </td>
                   <td className="py-3.5 px-3 text-center text-[#6C5CE7] bg-purple-50/50 font-black">
-                    {lang === 'it'
-                      ? 'Puntuale, immediata e divertente'
-                      : 'Targeted, playful & immediate'}
+                    Targeted, playful & immediate
                   </td>
                 </tr>
               </tbody>
@@ -753,23 +617,15 @@ export const ParentLandingPage: React.FC = () => {
           <div className="md:col-span-8 space-y-4">
             <div className="inline-flex items-center gap-2 bg-[#D4AF37] text-white px-3.5 py-1 rounded-full text-xs font-fredoka font-black uppercase tracking-wider shadow-xs">
               <Award size={16} />
-              <span>
-                {lang === 'it'
-                  ? 'IL PREMIO UFFICIALE DI TEACHER TINA'
-                  : 'OFFICIAL TEACHER TINA DIPLOMA'}
-              </span>
+              <span>OFFICIAL TEACHER TINA DIPLOMA</span>
             </div>
 
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A] leading-tight">
-              {lang === 'it'
-                ? 'Come il Gran Certificato Motiva Tuo Figlio'
-                : 'How the Grand Certificate Motivates Your Child'}
+              How the Grand Certificate Motivates Your Child
             </h2>
 
             <p className="font-nunito text-sm sm:text-base text-gray-700 font-semibold leading-relaxed">
-              {lang === 'it'
-                ? 'Nel videogioco, tuo figlio affronta una grande missione: completare tutti i 15 stage nei 5 mondi per sbloccare il Gran Certificato di Teacher Tina. Il diploma recita l’idoneità ufficiale per le lezioni private 1-on-1 ed è pronto per essere stampato e incorniciato in camera sua!'
-                : 'In our adventure, your child embarks on a grand quest: finishing all 15 stages across the 5 magical worlds to unlock the Official Certificate of Achievement. It proudly declares eligibility for 1-on-1 private lessons with Teacher Tina and is printable in high-resolution!'}
+              In our adventure, your child embarks on a grand quest: finishing all 15 stages across the 5 magical worlds to unlock the Official Certificate of Achievement. It proudly declares eligibility for 1-on-1 private lessons with Teacher Tina and is printable in high-resolution to frame on their bedroom wall!
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -777,13 +633,13 @@ export const ParentLandingPage: React.FC = () => {
                 to="/certificate"
                 className="bg-white hover:bg-gray-50 text-[#996515] border-2 border-[#D4AF37] px-5 py-2.5 rounded-2xl font-fredoka font-bold text-xs sm:text-sm shadow-xs transition-all"
               >
-                {lang === 'it' ? 'Anteprima Certificato 📜' : 'Preview Certificate 📜'}
+                Preview Certificate 📜
               </Link>
               <button
                 onClick={() => navigate('/play')}
                 className="bg-[#26324A] hover:bg-[#1A2333] text-white px-5 py-2.5 rounded-2xl font-fredoka font-bold text-xs sm:text-sm shadow-xs transition-all"
               >
-                {lang === 'it' ? 'Inizia la Missione nel Gioco 🚀' : 'Start the Quest Now 🚀'}
+                Start the Quest Now 🚀
               </button>
             </div>
           </div>
@@ -809,10 +665,10 @@ export const ParentLandingPage: React.FC = () => {
         <div className="max-w-3xl mx-auto space-y-8">
           <div className="text-center space-y-3">
             <span className="font-fredoka text-xs sm:text-sm font-black text-[#6C5CE7] bg-purple-50 px-4 py-1.5 rounded-full uppercase tracking-wider border border-purple-100">
-              {lang === 'it' ? 'Domande Frequenti' : 'Frequently Asked Questions'}
+              Frequently Asked Questions
             </span>
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A]">
-              {lang === 'it' ? 'Tutto Ciò che i Genitori Chiedono' : 'What Parents Want to Know'}
+              Everything Parents Need to Know
             </h2>
           </div>
 
@@ -830,7 +686,7 @@ export const ParentLandingPage: React.FC = () => {
                     className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-gray-50/70"
                   >
                     <span className="font-fredoka text-base sm:text-lg font-bold text-[#26324A]">
-                      {faq.q[lang]}
+                      {faq.q.en}
                     </span>
                     <ChevronDown
                       size={20}
@@ -842,7 +698,7 @@ export const ParentLandingPage: React.FC = () => {
 
                   {isOpen && (
                     <div className="px-5 pb-5 pt-1 border-t border-gray-100 font-nunito text-sm sm:text-base text-gray-600 font-semibold leading-relaxed">
-                      {faq.a[lang]}
+                      {faq.a.en}
                     </div>
                   )}
                 </div>
@@ -867,14 +723,10 @@ export const ParentLandingPage: React.FC = () => {
 
           <div className="space-y-2">
             <h2 className="font-fredoka text-3xl sm:text-4xl font-black text-[#26324A]">
-              {lang === 'it'
-                ? 'Parla Direttamente con Teacher Tina'
-                : 'Connect Directly with Teacher Tina'}
+              Connect Directly with Teacher Tina
             </h2>
             <p className="font-nunito text-sm sm:text-base text-gray-600 font-bold max-w-lg mx-auto">
-              {lang === 'it'
-                ? 'Vuoi conoscere le disponibilità, gli orari o organizzare un primo incontro conoscitivo per tuo figlio? Scrivici con un tocco su WhatsApp.'
-                : 'Ready to discuss lesson schedules, availability, or an introductory chat for your child? Reach out with one tap on WhatsApp.'}
+              Ready to discuss lesson schedules, availability, or an introductory chat for your child? Reach out with one tap on WhatsApp.
             </p>
           </div>
 
@@ -887,9 +739,7 @@ export const ParentLandingPage: React.FC = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-xl rounded-3xl shadow-2xl border-b-6 border-[#1AA851] transform hover:scale-103 transition-all cursor-pointer"
               >
                 <MessageCircle size={28} />
-                <span>
-                  {lang === 'it' ? 'Scrivimi su WhatsApp' : 'Chat on WhatsApp'}
-                </span>
+                <span>Chat on WhatsApp</span>
               </a>
 
               {TINA_CONFIG.email && (
@@ -898,7 +748,7 @@ export const ParentLandingPage: React.FC = () => {
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-5 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-3xl shadow-lg border-b-4 border-[#4A3EB5] transition-all"
                 >
                   <Mail size={22} />
-                  <span>Email</span>
+                  <span>Email Teacher Tina</span>
                 </a>
               )}
             </div>
@@ -906,12 +756,10 @@ export const ParentLandingPage: React.FC = () => {
             <div className="bg-amber-50 p-6 rounded-3xl border-2 border-dashed border-amber-300 max-w-md mx-auto">
               <span className="text-3xl block mb-2">📬</span>
               <h4 className="font-fredoka text-base font-bold text-[#26324A]">
-                {lang === 'it' ? 'Contatti in Configurazione' : 'Contacts Coming Soon'}
+                Contacts Coming Soon
               </h4>
               <p className="text-xs font-nunito font-semibold text-gray-600 mt-1">
-                {lang === 'it'
-                  ? 'Il numero WhatsApp e i canali diretti di Teacher Tina saranno configurati a breve.'
-                  : 'Teacher Tina’s direct WhatsApp contact will be listed here soon.'}
+                Teacher Tina’s direct WhatsApp contact will be listed here soon.
               </p>
             </div>
           )}
@@ -919,11 +767,11 @@ export const ParentLandingPage: React.FC = () => {
           <div className="pt-4 flex items-center justify-center gap-6 text-xs font-fredoka font-bold text-gray-500">
             <span className="flex items-center gap-1.5">
               <ShieldCheck size={16} className="text-[#35C98A]" />
-              <span>{lang === 'it' ? '100% Sicuro per Bambini' : 'Child Safe & COPPA'}</span>
+              <span>100% Child Safe Experience</span>
             </span>
             <span className="flex items-center gap-1.5">
               <Heart size={16} className="text-pink-500 fill-pink-500" />
-              <span>{lang === 'it' ? 'Solo Lezioni 1-on-1' : '1-on-1 Tutoring Only'}</span>
+              <span>1-on-1 Tutoring Only</span>
             </span>
           </div>
         </div>
@@ -941,10 +789,10 @@ export const ParentLandingPage: React.FC = () => {
 
           <div className="flex items-center gap-4 font-fredoka">
             <a href="#kids-play-zone" className="text-amber-400 hover:underline">
-              {lang === 'it' ? 'Area Gioco Bambini 🎮' : 'Kids Game Zone 🎮'}
+              Kids Game Zone 🎮
             </a>
             <Link to="/certificate" className="text-purple-300 hover:underline">
-              {lang === 'it' ? 'Gran Certificato 📜' : 'Grand Certificate 📜'}
+              Grand Certificate 📜
             </Link>
           </div>
         </div>
