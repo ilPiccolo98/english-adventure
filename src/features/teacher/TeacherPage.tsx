@@ -4,7 +4,6 @@ import { TINA_CONFIG } from '../../data/teacher.config';
 import { TeacherTinaPortrait } from '../../components/game/TeacherTinaPortrait';
 import {
   ArrowLeft,
-  MessageCircle,
   Mail,
   CheckCircle2,
   Star,
@@ -14,21 +13,17 @@ import {
 } from 'lucide-react';
 
 export const TeacherPage: React.FC = () => {
-  const isAvailable =
-    TINA_CONFIG.contactStatus === 'available' &&
-    (TINA_CONFIG.whatsappNumber || TINA_CONFIG.email);
-
   const [activePhoto, setActivePhoto] = useState<
     'book' | 'welcome' | 'lesson' | 'reading' | 'thumbsUp'
   >('book');
 
-  const getWhatsAppLink = () => {
-    if (!TINA_CONFIG.whatsappNumber) return '#';
-    const text = encodeURIComponent(
-      TINA_CONFIG.whatsappMessage ||
-        'Hello Teacher Tina! I would like to ask about individual English lessons.'
+  const email = TINA_CONFIG.email || 'teachertina.english@gmail.com';
+  const getEmailLink = () => {
+    const subject = encodeURIComponent('Inquiry: 1-on-1 English Lessons with Teacher Tina');
+    const body = encodeURIComponent(
+      'Hello Teacher Tina! I saw English Adventure and would like to ask about individual lessons for my child.'
     );
-    return `https://wa.me/${TINA_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${text}`;
+    return `mailto:${email}?subject=${subject}&body=${body}`;
   };
 
   const galleryItems = [
@@ -210,43 +205,18 @@ export const TeacherPage: React.FC = () => {
 
           {/* Contact & Booking Section */}
           <div className="pt-6 border-t border-gray-100 text-center">
-            {isAvailable ? (
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                {TINA_CONFIG.whatsappNumber && (
-                  <a
-                    href={getWhatsAppLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-lg rounded-2xl shadow-lg border-b-4 border-[#1AA851] transition-all"
-                  >
-                    <MessageCircle size={22} />
-                    <span>Chat on WhatsApp</span>
-                  </a>
-                )}
-                {TINA_CONFIG.email && (
-                  <a
-                    href={`mailto:${TINA_CONFIG.email}`}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-2xl shadow-lg border-b-4 border-[#5644D4] transition-all"
-                  >
-                    <Mail size={22} />
-                    <span>Email Teacher Tina</span>
-                  </a>
-                )}
-              </div>
-            ) : (
-              <div className="bg-amber-50 p-6 rounded-3xl border-2 border-dashed border-amber-300 max-w-lg mx-auto">
-                <span className="text-3xl block mb-2">📬</span>
-                <h4 className="font-fredoka text-lg font-bold text-[#26324A]">
-                  Contact Details Coming Soon
-                </h4>
-                <p className="text-xs sm:text-sm font-nunito font-semibold text-gray-600 mt-1">
-                  Teacher Tina's direct WhatsApp number and lesson booking schedule will be listed here.
-                </p>
-                <div className="mt-3 text-[11px] text-gray-400 bg-white p-2 rounded-xl border border-gray-200 font-mono">
-                  Site owner: configure in <code>src/data/teacher.config.ts</code>
-                </div>
-              </div>
-            )}
+            <div className="max-w-md mx-auto space-y-3">
+              <a
+                href={getEmailLink()}
+                className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-2xl shadow-lg border-b-4 border-[#4A3EB5] transition-all cursor-pointer"
+              >
+                <Mail size={22} />
+                <span>Email Teacher Tina ({email})</span>
+              </a>
+              <p className="text-xs font-nunito font-semibold text-gray-500">
+                Direct email inquiries for 1-on-1 private lesson schedules & Cambridge CEFR curriculum.
+              </p>
+            </div>
           </div>
         </div>
       </div>

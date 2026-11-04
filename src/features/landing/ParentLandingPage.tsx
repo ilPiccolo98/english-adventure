@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  MessageCircle,
   Mail,
   CheckCircle2,
   Award,
@@ -190,10 +189,10 @@ export const ParentLandingPage: React.FC = () => {
             <button
               type="button"
               onClick={() => handleOpenContact()}
-              className="hidden sm:inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs shadow-xs transition-all cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1.5 bg-[#6C5CE7] hover:bg-[#5644D4] text-white px-3.5 py-1.5 rounded-2xl font-fredoka font-bold text-xs shadow-xs transition-all cursor-pointer"
             >
-              <MessageCircle size={16} />
-              <span>{isAr ? 'تواصل معنا' : 'Contact'}</span>
+              <Mail size={16} />
+              <span>{isAr ? 'راسلنا عبر الإيميل' : 'Email Teacher Tina'}</span>
             </button>
           </div>
         </div>
@@ -273,11 +272,11 @@ export const ParentLandingPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleOpenContact()}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-lg rounded-2xl shadow-xl border-b-4 border-[#1AA851] transform hover:scale-102 transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-black text-lg rounded-2xl shadow-xl border-b-4 border-[#4A3EB5] transform hover:scale-102 transition-all cursor-pointer"
               >
-                <MessageCircle size={24} />
+                <Mail size={24} />
                 <span>
-                  {isAr ? 'تواصل مع تيتشر تينا عبر واتساب' : 'Chat with Teacher Tina on WhatsApp'}
+                  {isAr ? 'تواصل مع تيتشر تينا عبر البريد الإلكتروني' : 'Email Teacher Tina'}
                 </span>
               </button>
 
@@ -593,10 +592,10 @@ export const ParentLandingPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleOpenContact()}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-sm shadow-md transition-all cursor-pointer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-sm shadow-md transition-all cursor-pointer"
                     >
-                      <MessageCircle size={18} />
-                      <span>{isAr ? 'مراسلة تيتشر تينا' : 'Message Teacher Tina'}</span>
+                      <Mail size={18} />
+                      <span>{isAr ? 'مراسلة تيتشر تينا عبر الإيميل' : 'Email Teacher Tina'}</span>
                     </button>
                   </div>
                 </div>
@@ -831,7 +830,7 @@ export const ParentLandingPage: React.FC = () => {
       </section>
 
       {/* ============================================================ */}
-      {/* 💬 FINAL CONVERSION FUNNEL CTA (WhatsApp Direct Booking)     */}
+      {/* ✉️ FINAL CONVERSION FUNNEL CTA (Direct Email Inquiry)        */}
       {/* ============================================================ */}
       <section className="w-full py-16 px-4 bg-gradient-to-b from-white via-purple-50 to-pink-50 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
@@ -849,28 +848,19 @@ export const ParentLandingPage: React.FC = () => {
             </h2>
             <p className="font-nunito text-sm sm:text-base text-gray-600 font-bold max-w-lg mx-auto">
               {isAr
-                ? 'هل ترغب في تنسيق المواعيد، حجز تقييم مستوى أولي، أو الاستفسار عن كورس التأسيس لطفلك؟ تواصل معنا بلمسة واحدة عبر واتساب.'
-                : 'Ready to discuss lesson schedules, availability, or an introductory chat for your child? Reach out with one tap on WhatsApp.'}
+                ? 'هل ترغب في تنسيق المواعيد، حجز تقييم مستوى أولي، أو الاستفسار عن كورس التأسيس لطفلك؟ تواصل معنا مباشرة عبر البريد الإلكتروني.'
+                : 'Ready to discuss lesson schedules, availability, or an introductory chat for your child? Reach out directly via email.'}
             </p>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="pt-2 flex items-center justify-center">
             <button
               type="button"
               onClick={() => handleOpenContact()}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-black text-xl rounded-3xl shadow-2xl border-b-6 border-[#1AA851] transform hover:scale-103 transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-black text-xl rounded-3xl shadow-2xl border-b-6 border-[#4A3EB5] transform hover:scale-103 transition-all cursor-pointer"
             >
-              <MessageCircle size={28} />
-              <span>{isAr ? 'محادثة عبر واتساب' : 'Chat on WhatsApp'}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleOpenContact()}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-5 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-lg rounded-3xl shadow-lg border-b-4 border-[#4A3EB5] transition-all cursor-pointer"
-            >
-              <Mail size={22} />
-              <span>{isAr ? 'مراسلة عبر الإيميل' : 'Email Teacher Tina'}</span>
+              <Mail size={26} />
+              <span>{isAr ? 'مراسلة تيتشر تينا عبر الإيميل' : 'Email Teacher Tina'}</span>
             </button>
           </div>
 

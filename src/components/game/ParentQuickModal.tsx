@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { TINA_CONFIG } from '../../data/teacher.config';
-import { MessageCircle, Mail, Sparkles, CheckCircle2, ArrowRight, Play } from 'lucide-react';
+import { Mail, Sparkles, CheckCircle2, ArrowRight, Play } from 'lucide-react';
 
 interface ParentQuickModalProps {
   isOpen: boolean;
@@ -18,17 +18,14 @@ export const ParentQuickModal: React.FC<ParentQuickModalProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const isAvailable =
-    TINA_CONFIG.contactStatus === 'available' &&
-    (TINA_CONFIG.whatsappNumber || TINA_CONFIG.email);
+  const email = TINA_CONFIG.email || 'teachertina.english@gmail.com';
 
-  const getWhatsAppLink = () => {
-    if (!TINA_CONFIG.whatsappNumber) return '#';
-    const text = encodeURIComponent(
-      TINA_CONFIG.whatsappMessage ||
-        'Hello Teacher Tina! I saw English Adventure and would like to ask about individual lessons for my child.'
+  const getEmailLink = () => {
+    const subject = encodeURIComponent('Inquiry: 1-on-1 English Lessons with Teacher Tina');
+    const body = encodeURIComponent(
+      'Hello Teacher Tina! I am exploring English Adventure with my child and would like to ask about your 1-on-1 private lessons and availability.'
     );
-    return `https://wa.me/${TINA_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${text}`;
+    return `mailto:${email}?subject=${subject}&body=${body}`;
   };
 
   const handleGoToFullPage = () => {
@@ -86,34 +83,13 @@ export const ParentQuickModal: React.FC<ParentQuickModalProps> = ({
 
         {/* Contact Action */}
         <div>
-          {isAvailable ? (
-            <div className="flex flex-col sm:flex-row gap-2.5">
-              {TINA_CONFIG.whatsappNumber && (
-                <a
-                  href={getWhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-sm rounded-2xl shadow-md border-b-3 border-[#1AA851] transition-all"
-                >
-                  <MessageCircle size={18} />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              )}
-              {TINA_CONFIG.email && (
-                <a
-                  href={`mailto:${TINA_CONFIG.email}`}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-sm rounded-2xl shadow-md border-b-3 border-[#5644D4] transition-all"
-                >
-                  <Mail size={18} />
-                  <span>Email Tina</span>
-                </a>
-              )}
-            </div>
-          ) : (
-            <div className="bg-amber-50 p-3 rounded-2xl border border-dashed border-amber-300 text-xs font-nunito text-gray-600 font-semibold text-center">
-              <span>📬 Teacher Tina's direct WhatsApp booking will appear here.</span>
-            </div>
-          )}
+          <a
+            href={getEmailLink()}
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-sm rounded-2xl shadow-md border-b-3 border-[#4A3EB5] transition-all cursor-pointer"
+          >
+            <Mail size={18} />
+            <span>Email Teacher Tina ({email})</span>
+          </a>
         </div>
 
         {/* Bottom Dual Navigation Buttons */}

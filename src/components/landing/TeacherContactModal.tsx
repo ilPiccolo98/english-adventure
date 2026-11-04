@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal } from '../ui/Modal';
 import { TINA_CONFIG } from '../../data/teacher.config';
 import {
-  MessageCircle,
   Mail,
   Copy,
   Check,
@@ -11,6 +10,7 @@ import {
   Sparkles,
   Heart,
   Award,
+  Send,
 } from 'lucide-react';
 
 interface TeacherContactModalProps {
@@ -26,41 +26,29 @@ export const TeacherContactModal: React.FC<TeacherContactModalProps> = ({
   initialMessage,
   lang = 'en',
 }) => {
-  const [copiedField, setCopiedField] = useState<'message' | 'email' | 'phone' | null>(null);
+  const [copiedField, setCopiedField] = useState<'message' | 'email' | null>(null);
 
   const isAr = lang === 'ar';
 
   const defaultMessage =
     initialMessage ||
     (isAr
-      ? 'مرحبًا تيتشر تينا! أود الاستفسار عن كورس تأسيس اللغة الإنجليزية للأطفال (معايير Cambridge) لطفلي.'
-      : 'Hello Teacher Tina! I saw your English Foundation Course and would like to inquire about 1-on-1 private lessons for my child.');
+      ? 'مرحبًا تيتشر تينا! أود الاستفسار عن كورس تأسيس اللغة الإنجليزية للأطفال (معايير Cambridge) لطفلي وتنسيق المواعيد المتاحة.'
+      : 'Hello Teacher Tina! I saw your English Foundation Course and would like to inquire about 1-on-1 private lessons for my child and check your availability.');
 
   const displayEmail = TINA_CONFIG.email || 'teachertina.english@gmail.com';
-  const displayPhone = TINA_CONFIG.whatsappNumber || '+1 (555) 328-8462';
-
-  const getWhatsAppHref = () => {
-    const rawNumber = TINA_CONFIG.whatsappNumber
-      ? TINA_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')
-      : '';
-    const encodedText = encodeURIComponent(defaultMessage);
-    if (rawNumber) {
-      return `https://wa.me/${rawNumber}?text=${encodedText}`;
-    }
-    return `https://api.whatsapp.com/send?text=${encodedText}`;
-  };
 
   const getEmailHref = () => {
     const subject = encodeURIComponent(
       isAr
-        ? 'استفسار عن كورس تأسيس اللغة الإنجليزية للأطفال'
-        : 'Inquiry: English Foundation Course for my Child'
+        ? 'استفسار عن كورس تأسيس اللغة الإنجليزية للأطفال (Cambridge CEFR)'
+        : 'Inquiry: English Foundation Course for Children (Cambridge CEFR)'
     );
     const body = encodeURIComponent(defaultMessage);
     return `mailto:${displayEmail}?subject=${subject}&body=${body}`;
   };
 
-  const handleCopy = (text: string, field: 'message' | 'email' | 'phone') => {
+  const handleCopy = (text: string, field: 'message' | 'email') => {
     navigator.clipboard.writeText(text).then(() => {
       setCopiedField(field);
       setTimeout(() => setCopiedField(null), 2500);
@@ -68,33 +56,33 @@ export const TeacherContactModal: React.FC<TeacherContactModalProps> = ({
   };
 
   const t = {
-    modalTitle: isAr ? 'التواصل مع تيتشر تينا 👩‍🏫' : 'Contact Teacher Tina 👩‍🏫',
+    modalTitle: isAr
+      ? 'التواصل مع تيتشر تينا عبر البريد الإلكتروني 👩‍🏫'
+      : 'Email Teacher Tina 👩‍🏫',
     certifiedBadge: isAr ? 'معلمة لغة إنجليزية معتمدة' : 'Certified English Teacher',
     teacherName: isAr ? 'تيتشر تينا' : 'Teacher Tina',
     greeting: isAr
-      ? '«يسعدني جدًا مساعدة طفلك في رحلة تأسيس الإنجليزية بكل حب وثقة وفق معايير Cambridge CEFR. اختاري الطريقة الأنسب لك للتواصل!»'
-      : '“I would love to help your child speak English with joy and confidence. Choose your preferred way to connect below!”',
-    whatsappTitle: isAr ? 'محادثة مباشرة عبر واتساب' : 'WhatsApp Direct Chat',
-    fastestTag: isAr ? 'الأسرع ردًا' : 'Fastest',
-    whatsappDesc: isAr
-      ? 'محادثة مباشرة لتنسيق الحصص الفردية والمواعيد'
-      : TINA_CONFIG.whatsappNumber
-      ? displayPhone
-      : 'Direct message to schedule lessons',
-    openChat: isAr ? 'فتح المحادثة' : 'Open Chat',
-    emailTitle: isAr ? 'الاستفسار عبر البريد الإلكتروني' : 'Email Inquiry',
-    sendEmail: isAr ? 'إرسال إيميل' : 'Send Email',
-    suggestedLabel: isAr ? 'نموذج الرسالة المقترحة' : 'Suggested Message Template',
-    copiedText: isAr ? 'تم النسخ!' : 'Copied!',
-    copyText: isAr ? 'نسخ' : 'Copy',
-    messageCopied: isAr ? 'تم نسخ الرسالة!' : 'Message Copied!',
-    copyMessage: isAr ? 'نسخ الرسالة' : 'Copy Message',
+      ? '«يسعدني جدًا مساعدة طفلك في رحلة تأسيس الإنجليزية بكل حب وثقة وفق معايير Cambridge CEFR. راسليني عبر البريد الإلكتروني مباشرة أو انسخي العنوان أدناه!»'
+      : '“I would love to help your child speak English with joy and confidence. Send me an email directly or copy my address below!”',
+    emailCardTitle: isAr ? 'البريد الإلكتروني المباشر' : 'Direct Email Address',
+    personalInboxTag: isAr ? 'صندوق بريد شخصي' : 'Personal Inbox',
+    openEmailBtn: isAr ? 'فتح تطبيق البريد وكتابة رسالة' : 'Open Email App & Compose',
+    copyEmailBtn: isAr ? 'نسخ عنوان البريد' : 'Copy Email Address',
+    emailCopiedText: isAr ? 'تم نسخ عنوان البريد!' : 'Email Address Copied!',
+    suggestedLabel: isAr
+      ? 'نموذج الرسالة المقترحة (لنسخها في Gmail أو Outlook)'
+      : 'Suggested Message Template (for Gmail, Outlook, etc.)',
+    copyTemplateBtn: isAr ? 'نسخ نص الرسالة' : 'Copy Message Text',
+    templateCopiedText: isAr ? 'تم نسخ نص الرسالة!' : 'Message Copied!',
+    responseTimeNote: isAr
+      ? '⚡ يتم الرد شخصيًا على جميع استفسارات أولياء الأمور عبر البريد الإلكتروني خلال 24 ساعة.'
+      : '⚡ Teacher Tina personally responds to all parent email inquiries within 24 hours.',
     formatTitle: isAr ? 'حصص فردية 1-on-1' : '1-on-1 Online',
     formatDesc: isAr ? 'عبر Zoom / Google Meet' : 'Zoom / Google Meet',
     durationTitle: isAr ? '50–60 دقيقة للحصة' : '50–60 Minutes',
     durationDesc: isAr ? '3 حصص أسبوعيًا (12 شهريًا)' : '3 lessons per week (12/mo)',
     followUpTitle: isAr ? 'متابعة دورية مباشرة' : 'Direct Follow-Up',
-    followUpDesc: isAr ? 'مباشرة مع تيتشر تينا' : 'Direct with Teacher Tina',
+    followUpDesc: isAr ? 'مباشرة عبر البريد الإلكتروني' : 'Direct via Email',
     footerNote: isAr
       ? 'رعاية تربوية مخصصة لكل طفل حسب وتيرته الفردية'
       : 'Gentle, personalized care tailored to each child’s pace',
@@ -136,90 +124,58 @@ export const TeacherContactModal: React.FC<TeacherContactModalProps> = ({
         </div>
 
         {/* ============================================================ */}
-        {/* 📱 PRIMARY CONTACT CHANNELS (WhatsApp & Email)              */}
+        {/* ✉️ PRIMARY EMAIL CHANNEL (Exclusive Contact Method)          */}
         {/* ============================================================ */}
-        <div className="space-y-3">
-          {/* WhatsApp Direct Option */}
-          <div className="bg-emerald-50/80 rounded-2xl p-4 border-2 border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-2xs">
-            <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-start">
-              <div className="w-12 h-12 rounded-2xl bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-md">
-                <MessageCircle size={26} />
+        <div className="bg-gradient-to-br from-purple-50/90 via-white to-pink-50/60 rounded-3xl p-5 border-2 border-purple-200 shadow-md space-y-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-start">
+            <div className="flex items-center gap-3.5">
+              <div className="w-13 h-13 rounded-2xl bg-[#6C5CE7] text-white flex items-center justify-center shrink-0 shadow-lg shadow-purple-200">
+                <Mail size={26} />
               </div>
               <div>
                 <div className="flex items-center justify-center sm:justify-start gap-1.5">
-                  <span className="font-fredoka font-black text-sm text-[#26324A]">
-                    {t.whatsappTitle}
+                  <span className="font-fredoka font-black text-sm sm:text-base text-[#26324A]">
+                    {t.emailCardTitle}
                   </span>
-                  <span className="text-[10px] bg-emerald-200/80 text-emerald-900 font-fredoka font-bold px-2 py-0.5 rounded-full">
-                    {t.fastestTag}
+                  <span className="text-[10px] bg-purple-100 text-[#6C5CE7] font-fredoka font-black px-2 py-0.5 rounded-full uppercase">
+                    {t.personalInboxTag}
                   </span>
                 </div>
-                <span className="text-xs font-nunito font-semibold text-gray-600 block">
-                  {t.whatsappDesc}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 w-full sm:w-auto justify-center">
-              <a
-                href={getWhatsAppHref()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer"
-              >
-                <MessageCircle size={16} />
-                <span>{t.openChat}</span>
-              </a>
-
-              {TINA_CONFIG.whatsappNumber && (
-                <button
-                  type="button"
-                  onClick={() => handleCopy(displayPhone, 'phone')}
-                  className="px-3 py-2.5 rounded-xl bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-fredoka font-bold text-xs flex items-center gap-1 transition-all cursor-pointer"
-                  title="Copy Phone Number"
-                >
-                  {copiedField === 'phone' ? <Check size={14} /> : <Copy size={14} />}
-                  <span>{copiedField === 'phone' ? t.copiedText : t.copyText}</span>
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Email Option */}
-          <div className="bg-purple-50/70 rounded-2xl p-4 border-2 border-purple-200 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-2xs">
-            <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-start">
-              <div className="w-12 h-12 rounded-2xl bg-[#6C5CE7] text-white flex items-center justify-center shrink-0 shadow-md">
-                <Mail size={24} />
-              </div>
-              <div>
-                <span className="font-fredoka font-black text-sm text-[#26324A] block">
-                  {t.emailTitle}
-                </span>
-                <span className="text-xs font-nunito font-semibold text-gray-600 block break-all">
+                <span className="font-mono text-sm sm:text-base font-bold text-[#6C5CE7] block break-all mt-0.5 select-all">
                   {displayEmail}
                 </span>
               </div>
             </div>
+          </div>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto justify-center">
-              <a
-                href={getEmailHref()}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer"
-              >
-                <Mail size={16} />
-                <span>{t.sendEmail}</span>
-              </a>
+          {/* Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+            <a
+              href={getEmailHref()}
+              className="inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-2xl bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-sm shadow-md border-b-3 border-[#4A3EB5] transition-all cursor-pointer"
+            >
+              <Send size={16} />
+              <span>{t.openEmailBtn}</span>
+            </a>
 
-              <button
-                type="button"
-                onClick={() => handleCopy(displayEmail, 'email')}
-                className="px-3 py-2.5 rounded-xl bg-white hover:bg-purple-100 text-[#6C5CE7] border border-purple-300 font-fredoka font-bold text-xs flex items-center gap-1 transition-all cursor-pointer"
-                title="Copy Email Address"
-              >
-                {copiedField === 'email' ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copiedField === 'email' ? t.copiedText : t.copyText}</span>
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => handleCopy(displayEmail, 'email')}
+              className={`inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-2xl border-2 font-fredoka font-bold text-sm shadow-2xs transition-all cursor-pointer ${
+                copiedField === 'email'
+                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                  : 'bg-white hover:bg-purple-50 border-purple-200 text-[#6C5CE7]'
+              }`}
+            >
+              {copiedField === 'email' ? <Check size={16} /> : <Copy size={16} />}
+              <span>{copiedField === 'email' ? t.emailCopiedText : t.copyEmailBtn}</span>
+            </button>
+          </div>
+
+          <div className="bg-purple-100/50 p-2.5 rounded-xl text-center">
+            <span className="text-xs font-nunito font-bold text-purple-900 block">
+              {t.responseTimeNote}
+            </span>
           </div>
         </div>
 
@@ -237,11 +193,11 @@ export const TeacherContactModal: React.FC<TeacherContactModalProps> = ({
               className="text-xs font-fredoka font-bold text-[#6C5CE7] hover:text-[#5644D4] flex items-center gap-1 cursor-pointer"
             >
               {copiedField === 'message' ? <Check size={13} /> : <Copy size={13} />}
-              <span>{copiedField === 'message' ? t.messageCopied : t.copyMessage}</span>
+              <span>{copiedField === 'message' ? t.templateCopiedText : t.copyTemplateBtn}</span>
             </button>
           </div>
 
-          <div className="bg-gray-50 p-3 rounded-xl border border-gray-200 font-nunito text-xs sm:text-sm text-gray-700 font-medium leading-relaxed italic">
+          <div className="bg-gray-50 p-3 rounded-xl border border-gray-200 font-nunito text-xs sm:text-sm text-gray-700 font-medium leading-relaxed italic select-all">
             “{defaultMessage}”
           </div>
         </div>

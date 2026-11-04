@@ -8,7 +8,7 @@ import { audioService } from '../../services/audio.service';
 import { TINA_CONFIG } from '../../data/teacher.config';
 import {
   Printer,
-  MessageCircle,
+  Mail,
   ArrowLeft,
   Sparkles,
   Lock,
@@ -41,16 +41,20 @@ export const CertificatePage: React.FC = () => {
     window.print();
   };
 
-  const getWhatsAppShareLink = () => {
-    const defaultPhone = TINA_CONFIG.whatsappNumber || '';
-    const cleanPhone = defaultPhone.replace(/[^0-9]/g, '');
-    const message = encodeURIComponent(
-      `Hello Teacher Tina! My child ${player.name} just completed all 15 stages in English Adventure and earned the official Certificate of Achievement (${totalStars} stars)! We would love to schedule private 1-on-1 English lessons with you!`
+  const getEmailCertificateLink = () => {
+    const email = TINA_CONFIG.email || 'teachertina.english@gmail.com';
+    const subject = encodeURIComponent(
+      `Grand Certificate of English Achievement: ${player.name} (${totalStars} Stars) - 1-on-1 Lessons Inquiry`
     );
-    if (cleanPhone) {
-      return `https://wa.me/${cleanPhone}?text=${message}`;
-    }
-    return `https://wa.me/?text=${message}`;
+    const body = encodeURIComponent(
+      `Hello Teacher Tina!\n\n` +
+        `My child ${player.name} has just successfully completed all 15 stages across all 5 worlds in English Adventure and earned the official Grand Certificate of English Achievement with ${totalStars} stars and ${totalCoins} coins!\n\n` +
+        `We would love to schedule 1-on-1 individual lessons with you to continue building a strong English foundation according to Cambridge CEFR standards.\n\n` +
+        `Please let us know your available days and schedules.\n\n` +
+        `Best regards,\n` +
+        `Parent of ${player.name}`
+    );
+    return `mailto:${email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -97,13 +101,11 @@ export const CertificatePage: React.FC = () => {
             </Button>
 
             <a
-              href={getWhatsAppShareLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-fredoka font-bold text-base rounded-2xl shadow-lg border-b-4 border-[#1AA851] transition-all"
+              href={getEmailCertificateLink()}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#6C5CE7] hover:bg-[#5644D4] text-white font-fredoka font-bold text-base rounded-2xl shadow-lg border-b-4 border-[#4A3EB5] transition-all"
             >
-              <MessageCircle size={20} />
-              <span>Share & Book 1-on-1 Lessons</span>
+              <Mail size={20} />
+              <span>Email Teacher Tina to Book 1-on-1 Lessons</span>
             </a>
           </div>
 

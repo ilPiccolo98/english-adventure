@@ -89,7 +89,7 @@ export const TINA_CONFIG: TeacherConfig = {
   whatsappNumber: '', // e.g. '+391234567890'
   whatsappMessage:
     'Hello Teacher Tina! I saw English Adventure and would like to ask about individual lessons for my child.',
-  email: '', // e.g. 'teacher.tina@example.com'
+  email: 'teachertina.english@gmail.com',
   bookingUrl: '', // e.g. 'https://calendly.com/...'
   photos: {
     book: './images/teacher-tina/teacher-tina-book.jpg',
@@ -377,9 +377,9 @@ export const TINA_CONFIG: TeacherConfig = {
         ar: 'كيف تتم المتابعة والتواصل مع ولي الأمر؟',
       },
       a: {
-        it: 'I genitori ricevono aggiornamenti periodici sui progressi del bambino e possono comunicare direttamente con Teacher Tina per coordinare orari e obiettivi.',
-        en: 'Parents receive regular progress updates, observations, and direct follow-up with Teacher Tina personally via WhatsApp.',
-        ar: 'تتم المتابعة الدورية مع ولي الأمر بانتظام وبشكل مباشر مع تيتشر تينا عبر واتساب للاطلاع على مستوى تقدم الطفل وملاحظات الأداء.',
+        it: 'I genitori ricevono aggiornamenti periodici sui progressi del bambino e possono comunicare direttamente con Teacher Tina via email per coordinare orari e obiettivi.',
+        en: 'Parents receive regular progress updates, observations, and direct follow-up with Teacher Tina personally via email.',
+        ar: 'تتم المتابعة الدورية مع ولي الأمر بانتظام وبشكل مباشر مع تيتشر تينا عبر البريد الإلكتروني للاطلاع على مستوى تقدم الطفل وملاحظات الأداء.',
       },
     },
     {
