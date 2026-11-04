@@ -4,7 +4,11 @@ import { Play, Sparkles, Trophy, Gamepad2, Stars } from 'lucide-react';
 import { useGameStore } from '../../store/game.store';
 import { TINA_CONFIG } from '../../data/teacher.config';
 
-export const KidsArcadePlaque: React.FC = () => {
+interface KidsArcadePlaqueProps {
+  lang?: 'en' | 'ar';
+}
+
+export const KidsArcadePlaque: React.FC<KidsArcadePlaqueProps> = ({ lang = 'en' }) => {
   const navigate = useNavigate();
   const hasProfile = useGameStore((state) => state.hasInitializedProfile);
   const completedStages = useGameStore((state) => state.completedLevelIds.length);
@@ -30,6 +34,32 @@ export const KidsArcadePlaque: React.FC = () => {
     } else {
       navigate('/play');
     }
+  };
+
+  const isAr = lang === 'ar';
+
+  const t = {
+    topBadge: isAr
+      ? '🎮 منطقة ألعاب الأطفال • مجانية 100% • بدون تسجيل'
+      : '🎮 KIDS PLAY ZONE • 100% FREE • NO REGISTRATION NEEDED',
+    teacherName: isAr ? 'تيتشر تينا:' : 'Teacher Tina:',
+    greeting: isAr ? '«مرحبًا يا بطل! 👋»' : '“Hi Explorer! 👋”',
+    speech: isAr
+      ? 'هل أنت مستعد للمغامرة؟ استكشف العوالم السحرية الخمسة، واجمع النجوم، واحصل على شهادتك الرسمية!'
+      : 'Ready for an adventure? Explore all 5 magical worlds, collect stars, and win your official Certificate!',
+    playPrimary: isAr ? 'العب الآن!' : 'PLAY NOW!',
+    playSecondary: isAr ? 'ابدأ مغامرة الإنجليزية 🚀' : 'Start English Adventure 🚀',
+    subtext: isAr
+      ? '✨ اضغط على الزر وابدأ اللعب فورًا • مجانًا 100% • بدون تحميل'
+      : '✨ Tap the button to start playing right away • 100% Free • No Download Needed',
+    progress: isAr
+      ? `لقد أكملت ${completedStages}/15 مستوى! تابع مهمتك 🏆`
+      : `You completed ${completedStages}/15 stages! Continue your quest 🏆`,
+    stickyTitle: isAr ? 'هل طفلك مستعد للعب الآن؟' : 'Does your child want to play?',
+    stickyBtn: isAr ? 'العب اللعبة الآن 🎮' : 'PLAY GAME NOW 🎮',
+    badge1: isAr ? '🏝️ 5 عوالم سحرية' : '🏝️ 5 Magical Worlds',
+    badge2: isAr ? '⭐ 150 تحديًا صوتيًا' : '⭐ 150 Spoken Games',
+    badge3: isAr ? '📜 شهادة التخرج الرسمية' : '📜 Official Certificate',
   };
 
   return (
@@ -59,7 +89,7 @@ export const KidsArcadePlaque: React.FC = () => {
           {/* Top Fun Plaque Badge */}
           <div className="inline-flex items-center gap-2 bg-amber-400 text-amber-950 px-4 sm:px-6 py-2 rounded-full font-fredoka font-black text-xs sm:text-sm tracking-wider uppercase shadow-lg border-2 border-white mb-4 animate-bounce">
             <Sparkles size={16} className="fill-amber-950" />
-            <span>🎮 KIDS PLAY ZONE • 100% FREE • NO REGISTRATION NEEDED</span>
+            <span>{t.topBadge}</span>
             <Sparkles size={16} className="fill-amber-950" />
           </div>
 
@@ -76,13 +106,13 @@ export const KidsArcadePlaque: React.FC = () => {
               <span className="absolute -bottom-2 -right-2 text-xl select-none">👍</span>
             </div>
 
-            <div className="bg-white/95 text-[#26324A] p-3.5 sm:p-4 rounded-3xl border-3 border-yellow-400 shadow-xl text-center sm:text-left">
-              <div className="font-fredoka text-[#5644D4] font-black text-base sm:text-lg flex items-center justify-center sm:justify-start gap-1">
-                <span>Teacher Tina:</span>
-                <span className="text-amber-500">“Hi Explorer! 👋”</span>
+            <div className="bg-white/95 text-[#26324A] p-3.5 sm:p-4 rounded-3xl border-3 border-yellow-400 shadow-xl text-center sm:text-start">
+              <div className="font-fredoka text-[#5644D4] font-black text-base sm:text-lg flex items-center justify-center sm:justify-start gap-1.5">
+                <span>{t.teacherName}</span>
+                <span className="text-amber-500">{t.greeting}</span>
               </div>
               <p className="font-nunito text-xs sm:text-sm font-bold text-gray-700 leading-snug mt-0.5">
-                Ready for an adventure? Explore all 5 magical worlds, collect stars, and win your official Certificate!
+                {t.speech}
               </p>
             </div>
           </div>
@@ -94,7 +124,7 @@ export const KidsArcadePlaque: React.FC = () => {
             <button
               onClick={handleLaunchGame}
               className="w-full group relative cursor-pointer select-none rounded-3xl p-1 bg-gradient-to-b from-yellow-300 via-amber-400 to-amber-600 shadow-[0_12px_0_#996515,0_20px_25px_rgba(0,0,0,0.4)] active:translate-y-2 active:shadow-[0_4px_0_#996515] transition-all transform hover:scale-102"
-              title="PLAY NOW!"
+              title={t.playPrimary}
             >
               <div className="bg-gradient-to-r from-[#FFD54F] via-[#FFCA28] to-[#FFA000] rounded-2xl py-5 px-6 sm:py-6 sm:px-8 border-4 border-white flex items-center justify-center gap-4 relative overflow-hidden">
                 {/* Gloss highlight overlay */}
@@ -104,12 +134,12 @@ export const KidsArcadePlaque: React.FC = () => {
                   <Play size={36} className="fill-amber-500 translate-x-0.5" />
                 </div>
 
-                <div className="text-left flex flex-col">
+                <div className="text-start flex flex-col">
                   <span className="font-fredoka text-2xl sm:text-4xl font-black text-[#26324A] tracking-tight drop-shadow-xs leading-none">
-                    PLAY NOW!
+                    {t.playPrimary}
                   </span>
                   <span className="font-fredoka text-xs sm:text-base font-bold text-amber-950 uppercase tracking-wider mt-1 opacity-90 flex items-center gap-1">
-                    <span>Start English Adventure 🚀</span>
+                    <span>{t.playSecondary}</span>
                     <Stars size={14} className="text-amber-900 fill-amber-900" />
                   </span>
                 </div>
@@ -120,11 +150,11 @@ export const KidsArcadePlaque: React.FC = () => {
             {hasProfile && completedStages > 0 ? (
               <div className="mt-3 inline-flex items-center gap-2 bg-emerald-500 text-white px-4 py-1.5 rounded-full text-xs font-fredoka font-black shadow-md border-2 border-white">
                 <Trophy size={14} />
-                <span>You completed {completedStages}/15 stages! Continue your quest 🏆</span>
+                <span>{t.progress}</span>
               </div>
             ) : (
               <p className="mt-3 font-fredoka text-xs sm:text-sm text-yellow-200 font-bold drop-shadow-xs">
-                ✨ Tap the button to start playing right away • 100% Free • No Download Needed
+                {t.subtext}
               </p>
             )}
           </div>
@@ -132,13 +162,13 @@ export const KidsArcadePlaque: React.FC = () => {
           {/* Quick Pillars Badges */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 font-fredoka text-xs sm:text-sm font-bold text-white/95">
             <span className="bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-2xl border border-white/30 flex items-center gap-1.5">
-              🏝️ 5 Magical Worlds
+              {t.badge1}
             </span>
             <span className="bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-2xl border border-white/30 flex items-center gap-1.5">
-              ⭐ 150 Spoken Games
+              {t.badge2}
             </span>
             <span className="bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-2xl border border-white/30 flex items-center gap-1.5">
-              📜 Official Certificate
+              {t.badge3}
             </span>
           </div>
         </div>
@@ -162,7 +192,7 @@ export const KidsArcadePlaque: React.FC = () => {
                 />
               </div>
               <span className="font-fredoka text-xs sm:text-sm font-bold text-white hidden sm:inline">
-                Does your child want to play?
+                {t.stickyTitle}
               </span>
             </div>
 
@@ -171,7 +201,7 @@ export const KidsArcadePlaque: React.FC = () => {
               className="bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-[#26324A] px-5 py-2 rounded-2xl font-fredoka font-black text-xs sm:text-sm flex items-center gap-2 shadow-md border-2 border-white cursor-pointer transform hover:scale-105 active:scale-95 transition-all"
             >
               <Gamepad2 size={16} />
-              <span>PLAY GAME NOW 🎮</span>
+              <span>{t.stickyBtn}</span>
             </button>
           </div>
         </aside>
