@@ -89,7 +89,7 @@ export const TINA_CONFIG: TeacherConfig = {
   whatsappNumber: '', // e.g. '+391234567890'
   whatsappMessage:
     'Hello Teacher Tina! I saw English Adventure and would like to ask about individual lessons for my child.',
-  email: 'teachertina.english@gmail.com',
+  email: 'Easyeng111111@gmail.com',
   bookingUrl: '', // e.g. 'https://calendly.com/...'
   photos: {
     book: './images/teacher-tina/teacher-tina-book.jpg',

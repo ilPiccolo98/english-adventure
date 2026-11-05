@@ -42,7 +42,7 @@ export const CertificatePage: React.FC = () => {
   };
 
   const getEmailCertificateLink = () => {
-    const email = TINA_CONFIG.email || 'teachertina.english@gmail.com';
+    const email = TINA_CONFIG.email || 'Easyeng111111@gmail.com';
     const subject = encodeURIComponent(
       `Grand Certificate of English Achievement: ${player.name} (${totalStars} Stars) - 1-on-1 Lessons Inquiry`
     );
