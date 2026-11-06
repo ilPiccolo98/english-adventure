@@ -18,7 +18,7 @@ export const ParentQuickModal: React.FC<ParentQuickModalProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const email = TINA_CONFIG.email || 'Easyeng111111@gmail.com';
+  const email = TINA_CONFIG.email || 'easyeng111111@gmail.com';
 
   const getEmailLink = () => {
     const subject = encodeURIComponent('Inquiry: 1-on-1 English Lessons with Teacher Tina');

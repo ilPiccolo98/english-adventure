@@ -17,7 +17,7 @@ export const TeacherPage: React.FC = () => {
     'book' | 'welcome' | 'lesson' | 'reading' | 'thumbsUp'
   >('book');
 
-  const email = TINA_CONFIG.email || 'Easyeng111111@gmail.com';
+  const email = TINA_CONFIG.email || 'easyeng111111@gmail.com';
   const getEmailLink = () => {
     const subject = encodeURIComponent('Inquiry: 1-on-1 English Lessons with Teacher Tina');
     const body = encodeURIComponent(

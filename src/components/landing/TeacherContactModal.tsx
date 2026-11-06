@@ -36,7 +36,7 @@ export const TeacherContactModal: React.FC<TeacherContactModalProps> = ({
       ? 'مرحبًا تيتشر تينا! أود الاستفسار عن كورس تأسيس اللغة الإنجليزية للأطفال (معايير Cambridge) لطفلي وتنسيق المواعيد المتاحة.'
       : 'Hello Teacher Tina! I saw your English Foundation Course and would like to inquire about 1-on-1 private lessons for my child and check your availability.');
 
-  const displayEmail = TINA_CONFIG.email || 'Easyeng111111@gmail.com';
+  const displayEmail = TINA_CONFIG.email || 'easyeng111111@gmail.com';
 
   const getEmailHref = () => {
     const subject = encodeURIComponent(
